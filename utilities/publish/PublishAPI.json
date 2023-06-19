@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "0f9926a4-19cf-4f20-aa49-69b2d75111a1",
+		"_postman_id": "e8d32429-faee-49e9-953f-a7caa8b0f143",
 		"name": "API Gateway API Publication",
 		"description": "This Collection deploys the API to API Gateway",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "3558839-e8d32429-faee-49e9-953f-a7caa8b0f143"
 	},
 	"item": [
 		{
@@ -21,10 +22,12 @@
 							"var gatewayEndPoints = jsonData.apiResponse.gatewayEndPoints;\r",
 							"pm.globals.set(\"gatewayEndPoints\", JSON.stringify(gatewayEndPoints));"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "0e1f5a3b-793e-4678-9916-22c2a65140bc"
 					}
 				}
 			],
+			"id": "c89b5a84-4f99-4f9e-a803-10fef3099903",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -93,10 +96,12 @@
 							"\r",
 							"console.log(pm.variables.get(\"gatewayEndPoints\"));"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"id": "9b57dbe0-598e-42d9-95b1-b65b60387b21"
 					}
 				}
 			],
+			"id": "f9f7d823-c6a4-4742-a4ba-aaed409a6510",
 			"request": {
 				"auth": {
 					"type": "basic",
