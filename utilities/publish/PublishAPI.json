@@ -28,6 +28,9 @@
 				}
 			],
 			"id": "c89b5a84-4f99-4f9e-a803-10fef3099903",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -89,6 +92,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "9b57dbe0-598e-42d9-95b1-b65b60387b21",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -96,12 +100,14 @@
 							"\r",
 							"console.log(pm.variables.get(\"gatewayEndPoints\"));"
 						],
-						"type": "text/javascript",
-						"id": "9b57dbe0-598e-42d9-95b1-b65b60387b21"
+						"type": "text/javascript"
 					}
 				}
 			],
 			"id": "f9f7d823-c6a4-4742-a4ba-aaed409a6510",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -136,7 +142,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"communities\": [\r\n        \"3bdf8005-5685-3ef5-b132-de4681963fb6\"\r\n    ],\r\n    \"endpoints\": {{gatewayEndPoints}}\r\n}",
+					"raw": "{\r\n    \"communities\": [\r\n        \"ccac5a1b-f8b1-4513-8d81-b8c91245fafd\"\r\n    ],\r\n    \"endpoints\": {{gatewayEndPoints}}\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
