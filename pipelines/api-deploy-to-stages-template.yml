@@ -26,12 +26,13 @@ stages:
     variables:
       targetType: ${{ targetType }}
     jobs:
-    - job: Build_for_${{ targetType }}
+    - deployment: Build_for_${{ targetType }}
       variables:
       - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
       pool:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
+      environment: BUILD
       steps:
       - checkout: self
         submodules: "true"
