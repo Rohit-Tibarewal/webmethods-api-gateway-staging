@@ -1,0 +1,18 @@
+# Pipeline for apig staging
+
+trigger: none
+
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: test-remote-invoke # The name of the pipeline referenced by this pipeline resource.
+    project: test-remote-invoke # Required only if the source pipeline is in another project
+    trigger: true # Run this pipeline when any run of test-remote-invoke completes
+
+stages:
+- template: /pipelines/api-configure-stages-template.yml  # Template reference
+  parameters:
+    tenant: playground
+    target_types:
+    - CONFIG
+    - BUILD
