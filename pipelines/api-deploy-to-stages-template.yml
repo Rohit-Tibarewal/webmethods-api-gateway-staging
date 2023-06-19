@@ -33,24 +33,27 @@ stages:
         name: '$(agent_pool)'
         vmImage: '$(agent_pool_vmImage)'
       environment: BUILD
-      steps:
-      - checkout: self
-        submodules: "true"
-        persistCredentials: "true"
-      - template: /pipelines/api-build-template.yml  # Template reference
-        parameters:
-          apiProject: ${{parameters.apiProject}}
-          build_environment: $(environment)
-          target_type: $(targetType)
-          prep_condition: ${{true}}
-          test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
-          tenant: ${{parameters.tenant}}
-      - template: /pipelines/store-build-template.yml  # Template reference
-        parameters:
-          target_type: $(targetType)
-      # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
-      #   parameters:
-      #     target_type: $(targetType)
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - checkout: self
+              submodules: "true"
+              persistCredentials: "true"
+            - template: /pipelines/api-build-template.yml  # Template reference
+              parameters:
+                apiProject: ${{parameters.apiProject}}
+                build_environment: $(environment)
+                target_type: $(targetType)
+                prep_condition: ${{true}}
+                test_condition: ${{ ne(variables['targetType'], 'CONFIG') }}
+                tenant: ${{parameters.tenant}}
+            - template: /pipelines/store-build-template.yml  # Template reference
+              parameters:
+                target_type: $(targetType)
+            # - template: /pipelines/store-build-artifactory-template.yml  # Template reference
+            #   parameters:
+            #     target_type: $(targetType)
 
     - job: Deploy_to_API_Gateway_${{ targetType }}
       variables:
