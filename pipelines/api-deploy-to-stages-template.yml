@@ -30,7 +30,7 @@ stages:
       variables:
       - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
       pool:
-        name: 'ubuntu-latest'
+        name: 'Default'
         vmImage: '$(agent_pool_vmImage)'
       steps:
       - checkout: self
@@ -55,7 +55,7 @@ stages:
       variables:
       - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
-        name: 'ubuntu-latest'
+        name: 'Default'
         vmImage: '$(agent_pool_vmImage)'
       steps:
       - checkout: self
