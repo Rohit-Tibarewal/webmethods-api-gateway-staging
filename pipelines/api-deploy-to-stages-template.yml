@@ -31,7 +31,7 @@ stages:
       - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml
       pool:
         name: 'Azure Pipelines'
-        vmImage: '$(agent_pool_vmImage)'
+        vmImage: 'ubuntu-latest'
       steps:
       - checkout: self
         submodules: "true"
@@ -56,7 +56,7 @@ stages:
       - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
         name: 'Azure Pipelines'
-        vmImage: '$(agent_pool_vmImage)'
+        vmImage: '$ubuntu-latest'
       steps:
       - checkout: self
         submodules: "true"
