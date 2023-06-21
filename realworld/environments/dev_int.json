@@ -4,13 +4,13 @@
 	"values": [
 		{
 			"key": "hostname",
-			"value": "env162499.apigw-aw-us.webmethods.io",
+			"value": "apigateway-admin.7f58200005eb4c4caf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "env162499.apigw-aw-us.webmethods.io",
+			"value": "apigateway-admin.7f58200005eb4c4caf96.westeurope.aksapp.io",
 			"type": "text",
 			"enabled": true
 		},
@@ -19,6 +19,12 @@
 			"value": "443",
 			"type": "text",
 			"enabled": true
+		},
+		{
+			"enabled": true,
+			"key": "insecureflag",
+			"value": "--insecure",
+			"type": "text"
 		}
 	],
 	"_postman_variable_scope": "environment",
