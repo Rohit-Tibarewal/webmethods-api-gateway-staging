@@ -1,0 +1,10 @@
+# Pipeline for apig staging
+
+trigger: none
+
+stages:
+- template: /pipelines/api-configure-stages-template.yml  # Template reference
+  parameters:
+    tenant: playground
+    target_types:
+    - DEV_EXT
