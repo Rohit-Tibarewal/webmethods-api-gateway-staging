@@ -9,6 +9,6 @@ steps:
 - task: AzureLoadTest@1
   inputs:
     azureSubscription: 'sub-ps-wminno-container-sbx'
-    loadTestConfigFile: 'loadtest.yaml'
+    loadTestConfigFile: 'loadtesting/loadtest.yaml'
     resourceGroup: 'azure-demo-load-testing'
     loadTestResource: 'azure-demo-load-testing'
