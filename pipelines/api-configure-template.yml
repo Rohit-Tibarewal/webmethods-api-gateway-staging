@@ -74,7 +74,7 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       echo "##vso[task.setvariable variable=dns_zone_name]`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
-      echo "##vso[task.setvariable variable=hostname]apigateway.`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
+      echo "##vso[task.setvariable variable=hostname]apigateway-admin.`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
   displayName: Set DNS zone name
 
 - script: |
