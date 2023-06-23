@@ -1,0 +1,17 @@
+# Pipeline for apig staging
+
+trigger: none
+
+variables:
+- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
+# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
+
+# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
+
+stages:
+- template: /pipelines/api-deploy-to-stages-template.yml  # Template reference
+  parameters:
+    apiProject: postman-mocking
+    tenant: playground
+    target_types:
+    - DEV_EXT
