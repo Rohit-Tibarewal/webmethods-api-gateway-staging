@@ -12,3 +12,6 @@ steps:
     loadTestConfigFile: 'loadtesting/loadtest.yaml'
     resourceGroup: 'azure-demo-load-testing'
     loadTestResource: 'azure-demo-load-testing'
+
+- publish: $(System.DefaultWorkingDirectory)/loadTest
+  artifact: results
