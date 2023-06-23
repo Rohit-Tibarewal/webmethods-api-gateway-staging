@@ -61,24 +61,47 @@ steps:
     pathToPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_import.zip'
     artifactName: 'BUILD_import'
 
-- bash: |
-   echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
-   echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway BUILD configuration, extract ip, hostname, port and insecureflag'
+# - bash: |
+#    echo "##vso[task.setvariable variable=build_environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
+#    echo "##vso[task.setvariable variable=build_environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
+#    echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
+#    echo "##vso[task.setvariable variable=build_environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.build_environment}}`"
+#   workingDirectory: '$(System.DefaultWorkingDirectory)'
+#   displayName: 'Read and parse API Gateway BUILD configuration, extract ip, hostname, port and insecureflag'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'sub-ps-wminno-container-sbx'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "##vso[task.setvariable variable=cluster_name]`az aks list --query "[?tags.environment == 'azuredemo'].name" -o tsv`"
+      echo "##vso[task.setvariable variable=cluster_rg_name]`az aks list --query "[?tags.environment == 'azuredemo'].resourceGroup" -o tsv`"
+      echo "##vso[task.setvariable variable=node_rg_name]`az aks list --query "[?tags.environment == 'azuredemo'].nodeResourceGroup" -o tsv`"
+  displayName: Set cluster name, resource group name, node resource group name
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'sub-ps-wminno-container-sbx'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "##vso[task.setvariable variable=dns_zone_name]`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
+      echo "##vso[task.setvariable variable=hostname]apigateway-admin.`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
+  displayName: Set DNS zone name
 
 - script: |
     newman run utilities/prepare/Prepare_BUILD.json --reporters cli \
     --env-var preparer_user='$(preparer_user)' \
     --env-var preparer_password='$(preparer_password)' \
-    -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
+    --env-var hostname='$(hostname)' \
+    --env-var ip='$(hostname)' \
+    --env-var port='443' \
+    --insecure
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_ip)
+  # env:
+  #   no_proxy: $(build_environment_ip)
 
 - bash: |
     echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/${{parameters.tenant}}/apis/${{parameters.apiProject}}/scopes.json`"
@@ -92,21 +115,26 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_import.zip -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
+    --env-var file_Loc=$(Build.BuildId)_import.zip \
+    --env-var hostname='$(hostname)' \
+    --env-var ip='$(hostname)' \
+    --env-var port='443' \
+    --insecure
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Import the Deployable To API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_ip)
+  # env:
+  #   no_proxy: $(build_environment_ip)
 
 - script: |
     newman run ${{parameters.tenant}}/apis/${{parameters.apiProject}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml \
-    -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
+    --env-var hostname='$(hostname)' \
+    --env-var ip='$(hostname)' \
+    --env-var port='443' \
+    --insecure
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run tests on API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_ip)
+  # env:
+  #   no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.test_condition}})
 
 - task: PublishBuildArtifacts@1
@@ -142,25 +170,27 @@ steps:
     --env-var definitionVersion='$(Build.DefinitionVersion)' \
     --env-var aliases='$(aliases)' \
     --env-var globalAliases='$(globalAliases)' \
-    -e ${{parameters.tenant}}/environments/${{parameters.build_environment}} \
-    $(build_environment_insecureflag)
+    --env-var hostname='$(hostname)' \
+    --env-var ip='$(hostname)' \
+    --env-var port='443' \
+    --insecure
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Validate and prepare assets for ${{parameters.target_type}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
-  env:
-    no_proxy: $(build_environment_ip)
+  # env:
+  #   no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.prep_condition}})
 
 - bash: |
-   curl $(build_environment_insecureflag) \
+   curl --insecure \
           -d @"${{parameters.tenant}}/apis/${{parameters.apiProject}}/export_payload.json" \
           --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
-          https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive -v
+          https://$(hostname):443/rest/apigateway/archive -v
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Export the Deployable from API Gateway BUILD'
-  env:
-    no_proxy: $(build_environment_hostname)
+  # env:
+  #   no_proxy: $(build_environment_hostname)
 
 - bash: |
     pwd
