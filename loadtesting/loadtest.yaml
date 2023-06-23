@@ -1,0 +1,9 @@
+version: v0.1
+testId: SampleTest
+displayName: Sample Test
+testPlan: perftest.jmx
+description: Load test postman-mocking API
+engineInstances: 1
+autoStop:
+  errorPercentage: 80
+  timeWindow: 60
