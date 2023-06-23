@@ -28,25 +28,46 @@ steps:
     TENANT: ${{parameters.tenant}}
   displayName: Check for required parameters
 
-- bash: |
-   echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
-   echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
+# - bash: |
+#    echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+#    echo "##vso[task.setvariable variable=environment_ip]`jq -r '.values[] | select(.key == "ip") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+#    echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+#    echo "##vso[task.setvariable variable=environment_insecureflag]`jq -r '.values[] | select(.key == "insecureflag") | .value' ${{parameters.tenant}}/environments/${{parameters.environment}}`"
+#   workingDirectory: '$(System.DefaultWorkingDirectory)'
+#   displayName: 'Read and parse API Gateway ${{parameters.type}} configuration, extract ip, hostname, port and insecureflag'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'sub-ps-wminno-container-sbx'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "##vso[task.setvariable variable=cluster_name]`az aks list --query "[?tags.environment == 'azuredemo'].name" -o tsv`"
+      echo "##vso[task.setvariable variable=cluster_rg_name]`az aks list --query "[?tags.environment == 'azuredemo'].resourceGroup" -o tsv`"
+      echo "##vso[task.setvariable variable=node_rg_name]`az aks list --query "[?tags.environment == 'azuredemo'].nodeResourceGroup" -o tsv`"
+  displayName: Set cluster name, resource group name, node resource group name
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'sub-ps-wminno-container-sbx'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "##vso[task.setvariable variable=dns_zone_name]`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
+      echo "##vso[task.setvariable variable=hostname]apigateway-admin.`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
+  displayName: Set DNS zone name
 
 - bash: |
-   curl $(environment_insecureflag) \
+   curl --insecure \
           -d @"${{parameters.tenant}}/configuration/${{parameters.type}}/export_payload.json" \
           --output $(Build.BuildId)_export_from_${{parameters.type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
-          https://$(environment_hostname):$(environment_port)/rest/apigateway/archive
+          https://$(hostname):443/rest/apigateway/archive
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Export the Deployable from API Gateway ${{parameters.type}}'
-  env:
-    no_proxy: $(environment_hostname)
+  # env:
+  #   no_proxy: $(environment_hostname)
 
 # - bash: |
 #    curl $(environment_insecureflag) \

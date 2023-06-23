@@ -1,0 +1,31 @@
+# Pipeline for apig staging
+
+trigger: none
+
+parameters:
+- name: commitMessage
+  displayName: Message for the commit in Git?
+  type: string
+
+stages:
+- stage: DEV_EXT
+  jobs:
+  - job: Export_config_from_API_Gateway_DEV_EXT
+    variables:
+    - template: /playground/variables/DEV_EXT/variables-template.yml
+    pool:
+      name: '$(agent_pool)'
+      vmImage: '$(agent_pool_vmImage)'
+    steps:
+    - checkout: self
+      submodules: "true"
+      persistCredentials: "true"
+      clean: "true"
+    - template: /pipelines/api-export-config-template.yml  # Template reference
+      parameters:
+        environment: $(environment)
+        type: DEV_EXT
+        tenant: playground
+    - template: /pipelines/commit-template.yml  # Template reference
+      parameters:
+        commitMessage: ${{parameters.commitMessage}}
