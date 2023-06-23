@@ -130,7 +130,7 @@ steps:
     newman run ${{parameters.tenant}}/apis/${{parameters.apiProject}}/APITest.json --reporters cli,junit --reporter-junit-export ${{parameters.tenant}}/apis/${{parameters.apiProject}}/junitReport.xml \
     --env-var hostname='$(apihostname)' \
     --env-var ip='$(apihostname)' \
-    --env-var port='443' \
+    --env-var port='80' \
     --insecure
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run tests on API Gateway BUILD'

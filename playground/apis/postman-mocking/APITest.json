@@ -60,8 +60,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Mocking/1.0/post",
-					"protocol": "https",
+					"raw": "http://{{ip}}:{{port}}/gateway/PostmanEcho_Mocking/1.0/post",
+					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
@@ -122,8 +122,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Mocking/1.0/get?foo=bar",
-					"protocol": "https",
+					"raw": "http://{{ip}}:{{port}}/gateway/PostmanEcho_Mocking/1.0/get?foo=bar",
+					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
@@ -186,8 +186,8 @@
 					}
 				],
 				"url": {
-					"raw": "https://{{ip}}:{{port}}/gateway/PostmanEcho_Mocking/1.0/delete",
-					"protocol": "https",
+					"raw": "http://{{ip}}:{{port}}/gateway/PostmanEcho_Mocking/1.0/delete",
+					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
