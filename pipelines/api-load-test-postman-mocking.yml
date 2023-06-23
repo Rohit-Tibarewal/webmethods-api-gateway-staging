@@ -6,15 +6,9 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- template: /pipelines/api-configure-stages-template.yml  # Template reference
-  parameters:
-    tenant: ${{parameters.tenant}}
-    target_types:
-    - CONFIG
-    - BUILD
-    - DEV_INT
-    - DEV_EXT
-    - STAGE_INT
-    - STAGE_EXT
-    - PROD_INT
-    - PROD_EXT
+- task: AzureLoadTest@1
+  inputs:
+    azureSubscription: 'sub-ps-wminno-container-sbx'
+    loadTestConfigFile: 'loadtest.yaml'
+    resourceGroup: 'azure-demo-load-testing'
+    loadTestResource: 'azure-demo-load-testing'
