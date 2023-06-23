@@ -156,7 +156,7 @@ steps:
           --output $(Build.BuildId)_export_for_${{parameters.target_type}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
-          https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
+          https://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive -v
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Export the Deployable from API Gateway BUILD'
   env:
