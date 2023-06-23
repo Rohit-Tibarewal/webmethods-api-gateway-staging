@@ -2,6 +2,12 @@
 
 trigger: none
 
+resources:
+  pipelines:
+  - pipeline: trigger-pipeline # Name of the pipeline resource.
+    source: 'Deploy Mock API' # The name of the pipeline referenced by this pipeline resource.
+    trigger: true # Run this pipeline when any run of test-remote-invoke completes
+
 pool:
   vmImage: ubuntu-latest
 
