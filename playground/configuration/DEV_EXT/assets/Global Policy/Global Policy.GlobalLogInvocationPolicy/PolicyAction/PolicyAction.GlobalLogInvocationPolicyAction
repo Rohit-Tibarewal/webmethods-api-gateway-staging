@@ -7,10 +7,10 @@
   "templateKey" : "logInvocation",
   "parameters" : [ {
     "templateKey" : "storeRequestPayload",
-    "values" : [ "true" ]
+    "values" : [ "false" ]
   }, {
     "templateKey" : "storeResponsePayload",
-    "values" : [ "true" ]
+    "values" : [ "false" ]
   }, {
     "templateKey" : "storeAsZip",
     "values" : [ "false" ]
