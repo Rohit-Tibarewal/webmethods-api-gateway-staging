@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "697bc401-c41f-4f23-84be-f6312f660b62",
+		"_postman_id": "020229ca-d0d3-4d46-9f9f-bf2a6bef706b",
 		"name": "API Gateway Configuration",
 		"description": "This Collection deploys the API to API Gateway",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3558839"
 	},
 	"item": [
 		{
@@ -27,14 +28,14 @@
 							"// console.log(\"scopes Postman variable: \" + scopesString);\r",
 							"\r",
 							"if (scopesString === undefined || scopesString === null || scopesString === \"\") {\r",
-							"    postman.setNextRequest(\"ImportAPI\");\r",
+							"    postman.setNextRequest(\"ImportConfig\");\r",
 							"} else {\r",
 							"    let scopes = JSON.parse(pm.variables.get(\"scopes\"));\r",
 							"\r",
 							"//    console.log(\"Parsed scopes Postman variable: \" + JSON.stringify(scopes));\r",
 							"\r",
 							"    if (scopes.length === 0) {\r",
-							"        postman.setNextRequest(\"ImportAPI\");\r",
+							"        postman.setNextRequest(\"ImportConfig\");\r",
 							"    } else {\r",
 							"        let alias = JSON.parse(responseBody).alias;\r",
 							"\r",
