@@ -27,7 +27,6 @@ stages:
     jobs:
     - job: Configure_API_Gateway_${{ targetType }}
       variables:
-      - template: /${{parameters.tenant}}/variables/BUILD/variables-template.yml # workaround to make sure it depends on the BUILD variable group
       - template: /${{parameters.tenant}}/variables/${{variables.targetType}}/variables-template.yml
       pool:
         name: 'vmssagentpool'
