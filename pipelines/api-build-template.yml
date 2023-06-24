@@ -91,16 +91,16 @@ steps:
       echo "##vso[task.setvariable variable=apihostname]apigateway.`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
   displayName: Set DNS zone name
 
-- script: |
-    newman run utilities/prepare/Prepare_BUILD.json --reporters cli \
-    --env-var preparer_user='$(preparer_user)' \
-    --env-var preparer_password='$(preparer_password)' \
-    --env-var hostname='$(hostname)' \
-    --env-var ip='$(hostname)' \
-    --env-var port='443' \
-    --insecure
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
+# - script: |
+#     newman run utilities/prepare/Prepare_BUILD.json --reporters cli \
+#     --env-var preparer_user='$(preparer_user)' \
+#     --env-var preparer_password='$(preparer_password)' \
+#     --env-var hostname='$(hostname)' \
+#     --env-var ip='$(hostname)' \
+#     --env-var port='443' \
+#     --insecure
+#   workingDirectory: '$(System.DefaultWorkingDirectory)'
+#   displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway BUILD'
   # env:
   #   no_proxy: $(build_environment_ip)
 
