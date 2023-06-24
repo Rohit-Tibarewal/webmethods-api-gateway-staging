@@ -5,8 +5,8 @@ parameters:
   type: string
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)'
+- bash: echo Job runs in pool 'vmssagentpool' on VM image 'ubuntu-latest'
+  displayName: Job runs in pool 'vmssagentpool' on VM image 'ubuntu-latest'
 
 - bash: |
     git config --global user.email '$(Build.RequestedForEmail)'

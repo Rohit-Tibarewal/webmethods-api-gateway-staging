@@ -6,8 +6,8 @@ parameters:
   tenant: ''
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
+- bash: echo Job runs in pool 'vmssagentpool' on VM image 'ubuntu-latest' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
+  displayName: Job runs in pool 'vmssagentpool' on VM image 'ubuntu-latest' for tenant '${{parameters.tenant}}' and type '${{parameters.type}}'
 
 - bash: |
     if [ -z "$ENVIRONMENT" ]; then

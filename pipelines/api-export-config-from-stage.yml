@@ -33,8 +33,8 @@ stages:
     variables:
     - template: /${{parameters.tenant}}/variables/${{parameters.sourceType}}/variables-template.yml
     pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
+      name: 'vmssagentpool'
+      vmImage: 'ubuntu-latest'
     steps:
     - checkout: self
       submodules: "true"

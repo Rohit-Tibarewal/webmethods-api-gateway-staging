@@ -14,8 +14,8 @@ stages:
     variables:
     - template: /playground/variables/DEV_EXT/variables-template.yml
     pool:
-      name: '$(agent_pool)'
-      vmImage: '$(agent_pool_vmImage)'
+      name: 'vmssagentpool'
+      vmImage: 'ubuntu-latest'
     steps:
     - checkout: self
       submodules: "true"

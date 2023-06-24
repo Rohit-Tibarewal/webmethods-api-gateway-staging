@@ -4,8 +4,8 @@ parameters:
   target_type: ''
 
 steps:
-- bash: echo Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
-  displayName: Job runs in pool '$(agent_pool)' on VM image '$(agent_pool_vmImage)' for target_type '${{parameters.target_type}}'
+- bash: echo Job runs in pool 'vmssagentpool' on VM image 'ubuntu-latest' for target_type '${{parameters.target_type}}'
+  displayName: Job runs in pool 'vmssagentpool' on VM image 'ubuntu-latest' for target_type '${{parameters.target_type}}'
 
 - bash: |
     if [ -z "$TARGET_TYPE" ]; then
