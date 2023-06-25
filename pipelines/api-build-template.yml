@@ -193,10 +193,10 @@ steps:
   # env:
   #   no_proxy: $(build_environment_hostname)
 
-- bash: |
-    pwd
-    ls -l
-  displayName: 'DEBUG'
+# - bash: |
+#     pwd
+#     ls -l
+#   displayName: 'DEBUG'
 
 # - bash: |
 #    curl $(build_environment_insecureflag) \
