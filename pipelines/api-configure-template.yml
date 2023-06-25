@@ -56,6 +56,9 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
 
+- script: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  displayName: Install Azure CLI
+
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'sub-ps-wminno-container-sbx'
