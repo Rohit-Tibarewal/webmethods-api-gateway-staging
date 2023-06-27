@@ -1,7 +1,7 @@
 {
   "id" : "gateway.destination.elasticsearch.handle",
-  "pw" : "HBOvVYgVLn3QObCDAkYNxA==",
+  "pw" : "uj/8fvzqTwS9yVtkQQgJMQ==",
   "encryptorId" : "EntrustAes",
-  "saltString" : "QJD1VPtX21u18eSNrug0vg==",
+  "saltString" : "wLzy4JfRwldo+LOAnmyQLA==",
   "iterationCount" : 1
 }

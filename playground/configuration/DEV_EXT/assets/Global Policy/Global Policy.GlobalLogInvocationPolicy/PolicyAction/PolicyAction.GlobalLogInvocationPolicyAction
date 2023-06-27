@@ -7,10 +7,10 @@
   "templateKey" : "logInvocation",
   "parameters" : [ {
     "templateKey" : "storeRequestPayload",
-    "values" : [ "false" ]
+    "values" : [ "true" ]
   }, {
     "templateKey" : "storeResponsePayload",
-    "values" : [ "false" ]
+    "values" : [ "true" ]
   }, {
     "templateKey" : "storeAsZip",
     "values" : [ "false" ]
@@ -28,12 +28,6 @@
     "parameters" : [ {
       "templateKey" : "destinationType",
       "values" : [ "GATEWAY" ]
-    } ]
-  }, {
-    "templateKey" : "destination",
-    "parameters" : [ {
-      "templateKey" : "destinationType",
-      "values" : [ "ELASTICSEARCH" ]
     } ]
   } ],
   "active" : false
