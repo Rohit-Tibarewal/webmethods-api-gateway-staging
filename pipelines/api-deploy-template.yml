@@ -76,7 +76,7 @@ steps:
       echo "##vso[task.setvariable variable=cluster_name]`az aks list --query "[?tags.environment == 'azuredemo'].name" -o tsv`"
       echo "##vso[task.setvariable variable=cluster_rg_name]`az aks list --query "[?tags.environment == 'azuredemo'].resourceGroup" -o tsv`"
       echo "##vso[task.setvariable variable=node_rg_name]`az aks list --query "[?tags.environment == 'azuredemo'].nodeResourceGroup" -o tsv`"
-  displayName: Set cluster name, resource group name, node resource group name
+  displayName: Get cluster name, resource group name, node resource group name
 
 - task: AzureCLI@2
   inputs:
@@ -86,7 +86,7 @@ steps:
     inlineScript: |
       echo "##vso[task.setvariable variable=dns_zone_name]`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
       echo "##vso[task.setvariable variable=hostname]apigateway-admin.`az network dns zone list --resource-group $(node_rg_name) --query "[0].name" -o tsv`"
-  displayName: Set DNS zone name
+  displayName: Get DNS zone name
 
 - script: |
     newman run utilities/import/ImportAPI.json --reporters cli \
