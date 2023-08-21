@@ -78,26 +78,6 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
-              - template: /pipelines/api-build-steps-template.yml
-                parameters:
-                  apiProject: ${{apiProject}}
-                  build_environment: "$(Agent.Name)_environment.json"
-                  target_type: ${{ target_stage.name }}
-                  prep_condition: ${{true}}
-                  test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}
-                  tenant: ${{parameters.tenant}}
-              - template: /pipelines/store-build-template.yml
-                parameters:
-                  target_type: ${{ target_stage.name }}
-                  apiProject: ${{apiProject}}
-              - bash: |
-                  echo "##vso[build.addbuildtag]${{apiProject}}"
-                  echo "##vso[build.addbuildtag]${{parameters.build_stage.name}}"
-                  echo "##vso[build.addbuildtag]${{apiProject}}_${{parameters.build_stage.name}}"
-                displayName: Add build tags
-              # - template: /pipelines/store-build-artifactory-template.yml
-              #   parameters:
-              #     target_type: $(targetType)
 
       - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ target_stage.name }}'
         environment: ${{ target_stage.name }}
@@ -113,22 +93,3 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
-              - template: /pipelines/retrieve-build-template.yml
-                parameters:
-                    target_type: ${{ target_stage.name }}
-                    apiProject: ${{apiProject}}
-              - template: /pipelines/api-deploy-steps-template.yml
-                parameters:
-                  apiProject: ${{apiProject}}
-                  target_environment: ${{ target_stage.name }}_environment.json
-                  target_type: ${{ target_stage.name }}
-                  prep_condition: ${{true}}
-                  test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}
-                  tenant: ${{parameters.tenant}}
-              - bash: |
-                  echo "##vso[build.addbuildtag]${{apiProject}}"
-                  echo "##vso[build.addbuildtag]${{target_stage.name}}"
-                  echo "##vso[build.addbuildtag]${{apiProject}}_${{target_stage.name}}"
-                displayName: Add build tags
-        # dependsOn: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
-        # condition: succeeded()
