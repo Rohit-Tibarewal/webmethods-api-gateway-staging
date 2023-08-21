@@ -6,6 +6,9 @@ parameters:
   values:
   - playground
   - realworld
+- name: apiProjects
+  displayName: Deploy which API projects?
+  type: object
 - name: stages
   displayName: Configure API Gateway in which stages?
   type: object
@@ -72,56 +75,42 @@ parameters:
       image: ubuntu-latest
 
 stages:
-- ${{ each stage in parameters.stages }}:
-  - stage: ${{ stage.name }}
-    dependsOn: []
-    jobs:
-    - ${{ each job in stage.jobs }}:
-      - deployment: Configure_API_Gateway_${{ job.name }}
-        environment: ${{ job.name }}
-        variables:
-        - group: ${{parameters.tenant}}_${{ job.name }}_users
-        pool:
-          name: '${{ job.pool }}'
-          vmImage: '${{ job.image }}'
-        strategy:
-          runOnce:    #rolling, canary are the other strategies that are supported
-            deploy:
-              steps:
-              - checkout: self
-                submodules: "true"
-                persistCredentials: "true"
-              - download: none
+- ${{ each apiProject in parameters.apiProjects }}:
+  - ${{ each stage in parameters.stages }}:
+    - stage: ${{ stage.name }}
+      dependsOn: []
+      jobs:
+      - ${{ each job in stage.jobs }}:
+        - deployment: Configure_API_Gateway_${{ job.name }}
+          environment: ${{ job.name }}
+          variables:
+          - group: ${{parameters.tenant}}_${{ job.name }}_users
+          pool:
+            name: '${{ job.pool }}'
+            vmImage: '${{ job.image }}'
+          strategy:
+            runOnce:    #rolling, canary are the other strategies that are supported
+              deploy:
+                steps:
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                - download: none
 
-    - ${{ each job in stage.buildjobs }}:
-      - deployment: Configure_API_Gateway_${{ job.name }}
-        environment: ${{ stage.name }}
-        variables:
-        - group: ${{parameters.tenant}}_${{ job.name }}_users
-        pool:
-          name: '${{ job.pool }}'
-          vmImage: '${{ job.image }}'
-          demands: Agent.Name -equals ${{ job.name }}
-        strategy:
-          runOnce:    #rolling, canary are the other strategies that are supported
-            deploy:
-              steps:
-              - checkout: self
-                submodules: "true"
-                persistCredentials: "true"
-              - download: none
-
-    - ${{ each job in stage.configure_haft_jobs }}:
-      - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
-        environment: ${{ job.name }}
-        pool:
-          name: '${{ job.pool }}'
-          vmImage: '${{ job.image }}'
-        strategy:
-          runOnce:    #rolling, canary are the other strategies that are supported
-            deploy:
-              steps:
-              - checkout: self
-                submodules: "true"
-                persistCredentials: "true"
-              - download: none
+      - ${{ each job in stage.buildjobs }}:
+        - deployment: Configure_API_Gateway_${{ job.name }}
+          environment: ${{ stage.name }}
+          variables:
+          - group: ${{parameters.tenant}}_${{ job.name }}_users
+          pool:
+            name: '${{ job.pool }}'
+            vmImage: '${{ job.image }}'
+            demands: Agent.Name -equals ${{ job.name }}
+          strategy:
+            runOnce:    #rolling, canary are the other strategies that are supported
+              deploy:
+                steps:
+                - checkout: self
+                  submodules: "true"
+                  persistCredentials: "true"
+                - download: none

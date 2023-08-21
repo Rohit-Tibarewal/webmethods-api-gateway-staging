@@ -28,6 +28,20 @@ stages:
 - template: /pipelines/api-configure-stages-template.yml
   parameters:
     tenant: ${{parameters.tenant}}
+    apiProjects:
+    # - number_conversion
+    - odata_tutorial
+    - ping
+    # - star_wars
+    - petstore
+    - petstore_basicauth
+    - petstore_versioning
+    - postman_echo
+    # - postman_echo_jwt
+    # - postman_echo_oauth2
+    - postman_mocking
+    - multiple_tenants
+    - security_alias
     stages:
     - name: CONFIG
       jobs:
