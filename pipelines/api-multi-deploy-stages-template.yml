@@ -93,3 +93,4 @@ stages:
               - checkout: self
                 submodules: "true"
                 persistCredentials: "true"
+              - download: none
