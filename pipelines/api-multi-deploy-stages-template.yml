@@ -99,37 +99,37 @@ stages:
               #   parameters:
               #     target_type: $(targetType)
 
-      - ${{ each job in target_stage.jobs }}:
-        - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ job.name }}'
-          environment: ${{ job.name }}
-          variables:
-          - group: ${{parameters.tenant}}_${{ job.name }}_users
-          pool:
-            name: '${{ job.pool }}'
-            vmImage: '${{ job.image }}'
-          strategy:
-            runOnce:    #rolling, canary are the other strategies that are supported
-              deploy:
-                steps:
-                - checkout: self
-                  submodules: "true"
-                  persistCredentials: "true"
-                - template: /pipelines/retrieve-build-template.yml
-                  parameters:
-                      target_type: ${{ target_stage.name }}
-                      apiProject: ${{apiProject}}
-                - template: /pipelines/api-deploy-steps-template.yml
-                  parameters:
-                    apiProject: ${{apiProject}}
-                    target_environment: ${{ job.name }}_environment.json
-                    target_type: ${{ target_stage.name }}
-                    prep_condition: ${{true}}
-                    test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}
-                    tenant: ${{parameters.tenant}}
-                - bash: |
-                    echo "##vso[build.addbuildtag]${{apiProject}}"
-                    echo "##vso[build.addbuildtag]${{job.name}}"
-                    echo "##vso[build.addbuildtag]${{apiProject}}_${{job.name}}"
-                  displayName: Add build tags
-          dependsOn: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
-          condition: succeeded()
+      # - ${{ each job in target_stage.jobs }}:
+      #   - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ job.name }}'
+      #     environment: ${{ job.name }}
+      #     variables:
+      #     - group: ${{parameters.tenant}}_${{ job.name }}_users
+      #     pool:
+      #       name: '${{ job.pool }}'
+      #       vmImage: '${{ job.image }}'
+      #     strategy:
+      #       runOnce:    #rolling, canary are the other strategies that are supported
+      #         deploy:
+      #           steps:
+      #           - checkout: self
+      #             submodules: "true"
+      #             persistCredentials: "true"
+      #           - template: /pipelines/retrieve-build-template.yml
+      #             parameters:
+      #                 target_type: ${{ target_stage.name }}
+      #                 apiProject: ${{apiProject}}
+      #           - template: /pipelines/api-deploy-steps-template.yml
+      #             parameters:
+      #               apiProject: ${{apiProject}}
+      #               target_environment: ${{ job.name }}_environment.json
+      #               target_type: ${{ target_stage.name }}
+      #               prep_condition: ${{true}}
+      #               test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}
+      #               tenant: ${{parameters.tenant}}
+      #           - bash: |
+      #               echo "##vso[build.addbuildtag]${{apiProject}}"
+      #               echo "##vso[build.addbuildtag]${{job.name}}"
+      #               echo "##vso[build.addbuildtag]${{apiProject}}_${{job.name}}"
+      #             displayName: Add build tags
+      #     dependsOn: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
+      #     condition: succeeded()
