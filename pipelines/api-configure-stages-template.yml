@@ -10,9 +10,9 @@ parameters:
   type: object
 
 stages:
-- ${{ each apiProject in parameters.apiProjects }}:
+# - ${{ each apiProject in parameters.apiProjects }}:
   - ${{ each stage in parameters.stages }}:
-    - stage: ${{ stage.name }}_${{ apiProject }}
+    - stage: ${{ stage.name }}_${{ parameters.apiProjects[0] }}
       dependsOn: []
       jobs:
       - ${{ each job in stage.jobs }}:
