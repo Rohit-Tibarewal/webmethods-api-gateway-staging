@@ -94,3 +94,39 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
+
+  - ${{ each target_stage in parameters.target_stages }}:
+    - stage: ${{ target_stage.name }}_${{ parameters.apiProjects[1] }}
+      dependsOn: []
+      jobs:
+      - deployment: 'Build_${{parameters.apiProjects[1]}}_for_${{ target_stage.name }}'
+        environment: '${{ parameters.build_stage.name }}'
+        variables:
+        - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
+        pool:
+          name: '${{ parameters.build_stage.pool }}'
+          vmImage: '${{ parameters.build_stage.image }}'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
+
+      - deployment: 'Deploy_${{parameters.apiProjects[1]}}_to_API_Gateway_${{ target_stage.name }}'
+        environment: ${{ target_stage.name }}
+        variables:
+        - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
+        pool:
+          name: '${{ target_stage.jobs[0].pool }}'
+          vmImage: '${{ target_stage.jobs[0].image }}'
+        strategy:
+          runOnce:    #rolling, canary are the other strategies that are supported
+            deploy:
+              steps:
+              - checkout: self
+                submodules: "true"
+                persistCredentials: "true"
+              - download: none
