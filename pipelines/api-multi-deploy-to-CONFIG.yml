@@ -14,12 +14,6 @@ parameters:
   - playground
   - realworld
 
-variables:
-- template: /${{parameters.tenant}}/variables/variables-aliases-template.yml
-# - template: /${{parameters.tenant}}/variables/variables-artifactory-template.yml
-
-# name: $(Date:yyyyMMdd).$(Rev:r)-${{parameters.apiProject}}
-
 stages:
 - template: /pipelines/api-multi-deploy-stages-template.yml
   parameters:
