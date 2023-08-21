@@ -92,13 +92,6 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
-              - template: /pipelines/api-configure-steps-template.yml
-                parameters:
-                  environment: "${{ job.name }}_environment.json"
-                  type: ${{ stage.name }}
-                  tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{job.name}}"
-                displayName: Add build tag
 
     - ${{ each job in stage.buildjobs }}:
       - deployment: Configure_API_Gateway_${{ job.name }}
@@ -117,13 +110,6 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
-              - template: /pipelines/api-configure-steps-template.yml
-                parameters:
-                  environment: "${{ job.name }}_environment.json"
-                  type: ${{ stage.name }}
-                  tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{job.name}}"
-                displayName: Add build tag
 
     - ${{ each job in stage.configure_haft_jobs }}:
       - deployment: Configure_HAFT_for_API_Gateway_${{ stage.name }}
@@ -139,9 +125,3 @@ stages:
                 submodules: "true"
                 persistCredentials: "true"
               - download: none
-              - template: /pipelines/api-configure-haft-steps-template.yml
-                parameters:
-                  type: ${{ stage.name }}
-                  tenant: ${{parameters.tenant}}
-              - bash: echo "##vso[build.addbuildtag]${{job.name}}"
-                displayName: Add build tag
