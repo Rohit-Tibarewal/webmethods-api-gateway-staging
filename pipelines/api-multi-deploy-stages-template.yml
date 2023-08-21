@@ -55,7 +55,7 @@ stages:
       dependsOn: []
       jobs:
       - deployment: 'Build_${{parameters.apiProjects[1]}}_for_${{ parameters.target_stages[0].name }}'
-        environment: 'STAGE_EXT'
+        environment: 'DEV_EXT'
         variables:
         - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
         pool:
@@ -71,7 +71,7 @@ stages:
               - download: none
 
       - deployment: 'Deploy_${{parameters.apiProjects[1]}}_to_API_Gateway_${{ parameters.target_stages[0].name }}'
-        environment: 'STAGE_INT'
+        environment: 'DEV_INT'
         variables:
         - group: ${{parameters.tenant}}_${{ parameters.target_stages[0].name }}_users
         pool:
