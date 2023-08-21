@@ -99,13 +99,13 @@ stages:
               #   parameters:
               #     target_type: $(targetType)
 
-      - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ stage.name }}'
-        environment: ${{ stage.name }}
+      - deployment: 'Deploy_${{apiProject}}_to_API_Gateway_${{ target_stage.name }}'
+        environment: ${{ target_stage.name }}
         variables:
-        - group: ${{parameters.tenant}}_${{ stage.name }}_users
+        - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
         pool:
-          name: '${{ stage.jobs[0].pool }}'
-          vmImage: '${{ stage.jobs[0].image }}'
+          name: '${{ target_stage.jobs[0].pool }}'
+          vmImage: '${{ target_stage.jobs[0].image }}'
         strategy:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
@@ -120,15 +120,15 @@ stages:
               - template: /pipelines/api-deploy-steps-template.yml
                 parameters:
                   apiProject: ${{apiProject}}
-                  target_environment: ${{ stage.name }}_environment.json
+                  target_environment: ${{ target_stage.name }}_environment.json
                   target_type: ${{ target_stage.name }}
                   prep_condition: ${{true}}
                   test_condition: ${{ ne('${{ target_stage.name }}', 'CONFIG') }}
                   tenant: ${{parameters.tenant}}
               - bash: |
                   echo "##vso[build.addbuildtag]${{apiProject}}"
-                  echo "##vso[build.addbuildtag]${{stage.name}}"
-                  echo "##vso[build.addbuildtag]${{apiProject}}_${{stage.name}}"
+                  echo "##vso[build.addbuildtag]${{target_stage.name}}"
+                  echo "##vso[build.addbuildtag]${{apiProject}}_${{target_stage.name}}"
                 displayName: Add build tags
         dependsOn: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
         condition: succeeded()
