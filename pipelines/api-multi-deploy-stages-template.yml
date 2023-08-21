@@ -64,7 +64,7 @@ stages:
       dependsOn: []
       jobs:
       - deployment: 'Build_${{parameters.apiProjects[0]}}_for_${{ target_stage.name }}'
-        environment: '${{ parameters.build_stage.name }}'
+        environment: 'DEV_EXT'
         variables:
         - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
         pool:
@@ -80,7 +80,7 @@ stages:
               - download: none
 
       - deployment: 'Deploy_${{parameters.apiProjects[0]}}_to_API_Gateway_${{ target_stage.name }}'
-        environment: ${{ target_stage.name }}
+        environment: 'DEV_INT'
         variables:
         - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
         pool:
@@ -100,7 +100,7 @@ stages:
       dependsOn: []
       jobs:
       - deployment: 'Build_${{parameters.apiProjects[1]}}_for_${{ target_stage.name }}'
-        environment: '${{ parameters.build_stage.name }}'
+        environment: 'STAGE_EXT'
         variables:
         - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
         pool:
@@ -116,7 +116,7 @@ stages:
               - download: none
 
       - deployment: 'Deploy_${{parameters.apiProjects[1]}}_to_API_Gateway_${{ target_stage.name }}'
-        environment: ${{ target_stage.name }}
+        environment: 'STAGE_INT'
         variables:
         - group: ${{parameters.tenant}}_${{ target_stage.name }}_users
         pool:
