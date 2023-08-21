@@ -5,14 +5,6 @@ trigger: none
   #   include:
   #   - azure-demo
 
-resources:
-  pipelines:
-  - pipeline: trigger-pipeline # Name of the pipeline resource.
-    source: 'Configure API Gateways' # The name of the pipeline referenced by this pipeline resource.
-    trigger:
-      tags:
-      - CONFIG
-
 parameters:
 - name: tenant
   displayName: Deploy API project on API Gateway stages in which tenant?
