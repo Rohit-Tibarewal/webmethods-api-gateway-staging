@@ -130,5 +130,5 @@ stages:
                   echo "##vso[build.addbuildtag]${{target_stage.name}}"
                   echo "##vso[build.addbuildtag]${{apiProject}}_${{target_stage.name}}"
                 displayName: Add build tags
-        dependsOn: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
-        condition: succeeded()
+        # dependsOn: 'Build_${{apiProject}}_for_${{ target_stage.name }}'
+        # condition: succeeded()
