@@ -13,8 +13,6 @@ parameters:
   type: object
 
 stages:
-# - ${{ each apiProject in parameters.apiProjects }}:
-  # - ${{ each target_stage in parameters.target_stages }}:
     - stage: ${{ parameters.target_stages[0].name }}_${{ parameters.apiProjects[0] }}
       dependsOn: []
       jobs:
@@ -34,28 +32,11 @@ stages:
                 persistCredentials: "true"
               - download: none
 
-      # - deployment: 'Deploy_${{parameters.apiProjects[0]}}_to_API_Gateway_${{ parameters.target_stages[0].name }}'
-      #   environment: 'DEV_INT'
-      #   variables:
-      #   - group: ${{parameters.tenant}}_${{ parameters.target_stages[0].name }}_users
-      #   pool:
-      #     name: '${{ parameters.target_stages[0].jobs[0].pool }}'
-      #     vmImage: '${{ parameters.target_stages[0].jobs[0].image }}'
-      #   strategy:
-      #     runOnce:    #rolling, canary are the other strategies that are supported
-      #       deploy:
-      #         steps:
-      #         - checkout: self
-      #           submodules: "true"
-      #           persistCredentials: "true"
-      #         - download: none
-
-  # - ${{ each target_stage in parameters.target_stages }}:
     - stage: ${{ parameters.target_stages[0].name }}_${{ parameters.apiProjects[1] }}
       dependsOn: []
       jobs:
       - deployment: 'Build_${{parameters.apiProjects[1]}}_for_${{ parameters.target_stages[0].name }}'
-        environment: 'DEV_EXT'
+        environment: 'STAGE_EXT'
         variables:
         - group: ${{parameters.tenant}}_${{ parameters.build_stage.name }}_users
         pool:
@@ -70,18 +51,3 @@ stages:
                 persistCredentials: "true"
               - download: none
 
-      # - deployment: 'Deploy_${{parameters.apiProjects[1]}}_to_API_Gateway_${{ parameters.target_stages[0].name }}'
-      #   environment: 'DEV_INT'
-      #   variables:
-      #   - group: ${{parameters.tenant}}_${{ parameters.target_stages[0].name }}_users
-      #   pool:
-      #     name: '${{ parameters.target_stages[0].jobs[0].pool }}'
-      #     vmImage: '${{ parameters.target_stages[0].jobs[0].image }}'
-      #   strategy:
-      #     runOnce:    #rolling, canary are the other strategies that are supported
-      #       deploy:
-      #         steps:
-      #         - checkout: self
-      #           submodules: "true"
-      #           persistCredentials: "true"
-      #         - download: none
