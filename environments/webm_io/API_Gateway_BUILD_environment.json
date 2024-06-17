@@ -10,13 +10,13 @@
 		},
 		{
 			"key": "hostname",
-			"value": "playbuild.apigw-aw-eu.webmethods.io",
+			"value": "env685252.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "playbuild.apigw-aw-eu.webmethods.io",
+			"value": "env685252.apigw-aw-eu.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
@@ -40,13 +40,13 @@
 		},
 		{
 			"key": "api_hostname",
-			"value": "playbuild.apigw-aw-eu.webmethods.io",
+			"value": "env685252.apigw-aw-eu.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "api_ip",
-			"value": "playbuild.apigw-aw-eu.webmethods.io",
+			"value": "env685252.apigw-aw-eu.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
@@ -64,19 +64,19 @@
 		},
 		{
 			"key": "http_loadbalancer_urls",
-			"value": "http://playbuild.apigw-aw-eu.webmethods.io",
+			"value": "http://env685252.apigw-aw-eu.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "https_loadbalancer_urls",
-			"value": "https://playbuild.apigw-aw-eu.webmethods.io",
+			"value": "https://env685252.apigw-aw-eu.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "websocket_loadbalancer_urls",
-			"value": "ws://playbuild.apigw-aw-eu.webmethods.io",
+			"value": "ws://env685252.apigw-aw-eu.webmethods.io",
 			"type": "default",
 			"enabled": true
 		}
