@@ -10,13 +10,13 @@
 		},
 		{
 			"key": "hostname",
-			"value": "playdevint.apigw-aw-eu.webmethods.io",
+			"value": "env137759.apigw-aw-us.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
 		{
 			"key": "ip",
-			"value": "playdevint.apigw-aw-eu.webmethods.io",
+			"value": "env137759.apigw-aw-us.webmethods.io",
 			"type": "text",
 			"enabled": true
 		},
@@ -40,13 +40,13 @@
 		},
 		{
 			"key": "api_hostname",
-			"value": "playdevint.apigw-aw-eu.webmethods.io",
+			"value": "env137759.apigw-aw-us.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "api_ip",
-			"value": "playdevint.apigw-aw-eu.webmethods.io",
+			"value": "env137759.apigw-aw-us.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
@@ -64,19 +64,19 @@
 		},
 		{
 			"key": "http_loadbalancer_urls",
-			"value": "http://playdevint.apigw-aw-eu.webmethods.io",
+			"value": "http://env137759.apigw-aw-us.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "https_loadbalancer_urls",
-			"value": "https://playdevint.apigw-aw-eu.webmethods.io",
+			"value": "https://env137759.apigw-aw-us.webmethods.io",
 			"type": "default",
 			"enabled": true
 		},
 		{
 			"key": "websocket_loadbalancer_urls",
-			"value": "ws://playdevint.apigw-aw-eu.webmethods.io",
+			"value": "ws://env137759.apigw-aw-us.webmethods.io",
 			"type": "default",
 			"enabled": true
 		}
