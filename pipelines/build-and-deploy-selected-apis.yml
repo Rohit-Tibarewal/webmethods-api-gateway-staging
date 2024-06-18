@@ -19,6 +19,9 @@ parameters:
   - number_conversion
   - odata_tutorial
   - countries
+  - inventory
+  - inventory_direct
+  - inventory_direct_int    
 - name: selected_environment_set
   displayName: Deploy API(s) on API Gateway(s) in which environment set?
   default: webm_io
