@@ -105,6 +105,9 @@ parameters:
     - petstore
     # - petstore_basicauth
     - petstore_versioning
+    - inventory
+    - inventory_direct
+    - inventory_direct_int
     targets:
     - DEV_INT
     - TEST_INT
@@ -134,6 +137,9 @@ parameters:
     - postman_echo_mocking
     - postman_echo_multiple_tenants
     - postman_echo_security_alias
+    - inventory
+    - inventory_direct
+    - inventory_direct_int
     targets:
     - DESIGN
 
