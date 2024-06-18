@@ -1,0 +1,16 @@
+{
+  "id" : "2a55b5e0-1b01-47e7-a237-b107dbd766c0",
+  "names" : [ {
+    "value" : "Straight Through Routing",
+    "locale" : "en"
+  } ],
+  "templateKey" : "straightThroughRouting",
+  "parameters" : [ {
+    "templateKey" : "endpointUri",
+    "values" : [ "${wmio_int}/integration/restv2/development/fl4f0cd39b158adfd5b9fefe/inventory/${sys:resource_path}" ]
+  }, {
+    "templateKey" : "method",
+    "values" : [ "CUSTOM" ]
+  } ],
+  "active" : false
+}

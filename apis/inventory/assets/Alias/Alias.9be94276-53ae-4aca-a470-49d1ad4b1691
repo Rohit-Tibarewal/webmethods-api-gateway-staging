@@ -1,0 +1,7 @@
+{
+  "id" : "9be94276-53ae-4aca-a470-49d1ad4b1691",
+  "name" : "wmio_int",
+  "type" : "simple",
+  "owner" : "gitops",
+  "value" : "https://psdev.int-aws-de.webmethods.io"
+}
