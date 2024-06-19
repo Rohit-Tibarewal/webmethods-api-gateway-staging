@@ -372,6 +372,7 @@
   "apiName" : "inventory",
   "apiVersion" : "v1",
   "maturityState" : "Beta",
+  "apiGroups" : [ "Internal" ],
   "isActive" : true,
   "type" : "REST",
   "owner" : "gitops",
@@ -383,7 +384,7 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2024-06-03 19:04:30 GMT",
-  "lastModified" : "2024-06-03 19:05:32 GMT",
+  "lastModified" : "2024-06-19 08:54:48 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
   "id" : "20c48aa4-7eb5-4317-8089-16e879497c63"
