@@ -1,7 +1,8 @@
 {
   "id" : "9be94276-53ae-4aca-a470-49d1ad4b1691",
   "name" : "wmio_int",
+  "description" : "This is a simple alias on #{stage_name}# environment",
   "type" : "simple",
-  "owner" : "gitops",
+  "owner" : "roti",
   "value" : "https://psdev.int-aws-de.webmethods.io"
 }
