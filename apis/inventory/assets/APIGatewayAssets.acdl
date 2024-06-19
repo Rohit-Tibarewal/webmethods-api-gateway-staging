@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
-    <buildInfo name="BuildTimestamp" value="2024-06-19T16:25:06"/>
+    <buildInfo name="BuildTimestamp" value="2024-06-19T17:20:50"/>
     <asset name="API.20c48aa4-7eb5-4317-8089-16e879497c63" displayName="inventory[v1]" isDeployable="true">
         <implementation.generic type="API"/>
         <dependsOn>APIGateway:Policy.763646df-77e3-4021-9af4-5ae4752787fc</dependsOn>
@@ -18,7 +18,7 @@
     <asset name="Alias.9be94276-53ae-4aca-a470-49d1ad4b1691" displayName="wmio_int" isDeployable="true">
         <implementation.generic type="Alias"/>
         <property name="value for Simple alias wmio_int" many="false" isSecure="false" displayName="value for Simple alias wmio_int">
-            <value>https://psdev.int-aws-de.webmethods.io</value>
+            <value>#{wmio_int_url}#</value>
         </property>
     </asset>
     <asset name="PolicyAction.e4665369-a747-4c37-b88b-6db34421670b" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API inventory[v1]" isDeployable="true">

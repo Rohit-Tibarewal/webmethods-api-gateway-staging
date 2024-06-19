@@ -4,5 +4,5 @@
   "description" : "This is a simple alias on #{stage_name}# environment",
   "type" : "simple",
   "owner" : "roti",
-  "value" : "https://psdev.int-aws-de.webmethods.io"
+  "value" : "#{wmio_int_url}#"
 }
