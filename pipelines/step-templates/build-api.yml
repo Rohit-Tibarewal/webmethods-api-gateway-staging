@@ -97,10 +97,7 @@ steps:
     no_proxy: $(build_environment_ip)
 
 - bash: |
-  echo "Newman Postman Testing placeholder..."
-  #  newman run postman/collections/api_tests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export apis/${{parameters.api_project}}/junitReport.xml \
-  # -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
-  #  $(build_environment_api_insecure_flag)
+    echo "Newman Postman Testing placeholder..."
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run tests on API Gateway ${{parameters.build_environment_name}}'
   env:
