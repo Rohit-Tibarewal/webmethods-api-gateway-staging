@@ -104,11 +104,11 @@ steps:
     no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.test_condition}})
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
-    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
-  condition: ${{parameters.test_condition}}
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathToPublish: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
+#     artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
+#   condition: ${{parameters.test_condition}}
 
 # - task: FileTransform@1
 #   displayName: 'Replace alias values using pipeline variables'
