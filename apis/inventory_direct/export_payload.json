@@ -1,0 +1,11 @@
+{
+  "types": [
+    "api"
+  ],
+  "scope": [
+    {
+      "attributeName": "apiName",
+      "keyword": "inventory_direct"
+    }
+  ]
+}
