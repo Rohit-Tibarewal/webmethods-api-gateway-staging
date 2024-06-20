@@ -1,0 +1,8 @@
+{
+  "id" : "wm.security.truststore.DEFAULT_IS_TRUSTSTORE",
+  "pw" : "tB+PCL829/42eJNe2oGCwQ==",
+  "encryptorId" : "EntrustAes",
+  "saltString" : "+8OaygpPyEMURYDSeZmtuA==",
+  "iterationCount" : 1,
+  "_docType" : "passmanData"
+}

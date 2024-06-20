@@ -45,5 +45,6 @@
   "policyScope" : "GLOBAL",
   "systemPolicy" : true,
   "global" : true,
-  "active" : true
+  "active" : true,
+  "_docType" : "policy"
 }

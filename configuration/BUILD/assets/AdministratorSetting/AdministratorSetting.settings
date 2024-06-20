@@ -29,8 +29,10 @@
         "watt.net.maxClientKeepaliveConns" : "140",
         "watt.server.oauth.requireHTTPS" : "false",
         "watt.server.dateStampFmt" : "yyyy-MM-dd HH:mm:ss.SSS z",
-        "watt.server.threadPoolMin" : "600"
+        "watt.server.threadPoolMin" : "600",
+        "watt.server.http.Strict-Transport-Security" : "max-age=31536000; includeSubDomains"
       }
     }
-  }
+  },
+  "_docType" : "configurations"
 }

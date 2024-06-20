@@ -5,8 +5,8 @@
     "pg_Cache_maxCacheSize" : "1048576",
     "strictTrailingSlashValidation" : "false",
     "apig_schemaValidationPoolSize" : "10",
-    "pg.soapToRest.addNilAttribute" : "false",
     "retainSOAPResponseStatus" : "true",
+    "pg.soapToRest.addNilAttribute" : "false",
     "storeBinaryPayloadInEvents" : "true",
     "pg.security.allowedhostnames" : "",
     "maxRegexLengthInSearchQuery" : "37000",
@@ -79,6 +79,7 @@
     "pg.bulkhead.statusMessage" : "",
     "pg.soapToRest.removeWhitespaces" : "true",
     "backupSharedFileLocation" : "",
+    "allowedTracerCount" : "100",
     "pg.nativeServer.validatePrivateIPs" : "false",
     "maxWindowSize" : "10000",
     "return408ForConnectionTimeout" : "true",
@@ -126,5 +127,6 @@
     "apig_rest_service_redirect" : "false",
     "forwardQueryParams" : "false",
     "eventsBatchPayloadSizeInMB" : "10"
-  }
+  },
+  "_docType" : "configurations"
 }
