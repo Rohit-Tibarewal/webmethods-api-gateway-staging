@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2024-06-20T08:02:43"/>
+    <asset name="API.e72171a7-fb13-4473-a34c-c2bdeabd0789" displayName="inventory_direct[v1]" isDeployable="true">
+        <implementation.generic type="API"/>
+        <dependsOn>APIGateway:Policy.f371a01f-df19-4bed-84ce-a22ac781c994</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.EmptyRegisteredApplication</dependsOn>
+    </asset>
+    <asset name="Policy.f371a01f-df19-4bed-84ce-a22ac781c994" displayName="Policy For API inventory_direct[v1]" isDeployable="true">
+        <implementation.generic type="Policy"/>
+        <dependsOn>APIGateway:PolicyAction.31da9c83-e36e-43cb-b069-fb0e74970c4b</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.dc90fc45-2f73-4720-b7f0-823c016a17c1</dependsOn>
+    </asset>
+    <asset name="PolicyAction.31da9c83-e36e-43cb-b069-fb0e74970c4b" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API inventory_direct[v1]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.b2790b65-2597-45ef-a595-81d2b32231b5</dependsOn>
+    </asset>
+    <asset name="Alias.b2790b65-2597-45ef-a595-81d2b32231b5" displayName="aws_int" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="value for Simple alias aws_int" many="false" isSecure="false" displayName="value for Simple alias aws_int">
+            <value>#{aws_int_url}#</value>
+        </property>
+    </asset>
+    <asset name="PolicyAction.dc90fc45-2f73-4720-b7f0-823c016a17c1" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API inventory_direct[v1]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="RegisteredApplication.EmptyRegisteredApplication" displayName="RegisteredApplication [ EmptyRegisteredApplication ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+</asset_composite>

@@ -1,0 +1,419 @@
+{
+  "apiDefinition" : {
+    "info" : {
+      "version" : "1.0",
+      "title" : "product_rad"
+    },
+    "basePath" : "",
+    "serviceRegistryDisplayName" : "inventory_direct_v1",
+    "schemes" : [ ],
+    "consumes" : [ "application/json" ],
+    "produces" : [ "application/json" ],
+    "security" : [ {
+      "Basic" : [ ]
+    } ],
+    "paths" : {
+      "/product/{productName}/updateStock" : {
+        "patch" : {
+          "operationId" : "productproductNameupdateStock_PATCH_2",
+          "consumes" : [ "application/x-www-form-urlencoded" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "in" : "path",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "productName",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "headersV3" : { },
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/productproductNameupdateStock_PATCH_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "headersV3" : { },
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : {
+              "application/x-www-form-urlencoded" : {
+                "schema" : {
+                  "type" : "gateway",
+                  "schema" : "{\"type\":\"object\",\"properties\":{\"adjust\":{\"type\":\"string\",\"readOnly\":false},\"quantity\":{\"type\":\"string\",\"readOnly\":false}}}"
+                },
+                "examples" : { }
+              }
+            },
+            "name" : "productproductNameupdateStock_PATCH_2"
+          }
+        },
+        "parameters" : [ ],
+        "scopes" : [ ],
+        "displayName" : "/product/{productName}/updateStock",
+        "enabled" : true
+      },
+      "/product/{productName}/stockLevel" : {
+        "get" : {
+          "operationId" : "productproductNamestockLevel_GET_3",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "in" : "path",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "productName",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "headersV3" : { },
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/productproductNamestockLevel_GET_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "headersV3" : { },
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "productproductNamestockLevel_GET_3"
+          }
+        },
+        "parameters" : [ ],
+        "scopes" : [ ],
+        "displayName" : "/product/{productName}/stockLevel",
+        "enabled" : true
+      },
+      "/product" : {
+        "get" : {
+          "operationId" : "product_GET_1",
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "in" : "query",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "name",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "headersV3" : { },
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/product_GET_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "headersV3" : { },
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "product_GET_1"
+          }
+        },
+        "put" : {
+          "operationId" : "product_PUT_1",
+          "consumes" : [ "application/x-www-form-urlencoded" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "headersV3" : { },
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "headersV3" : { },
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : {
+              "application/x-www-form-urlencoded" : {
+                "schema" : {
+                  "type" : "gateway",
+                  "schema" : "{\"type\":\"object\",\"properties\":{\"Active\":{\"type\":\"string\",\"readOnly\":false},\"Category\":{\"type\":\"string\",\"readOnly\":false},\"Description\":{\"type\":\"string\",\"readOnly\":false},\"Name\":{\"type\":\"string\",\"readOnly\":false},\"Price\":{\"type\":\"string\",\"readOnly\":false},\"productName\":{\"type\":\"string\",\"readOnly\":false}}}"
+                },
+                "examples" : { }
+              }
+            },
+            "name" : "product_PUT_1"
+          }
+        },
+        "post" : {
+          "operationId" : "product_POST_1",
+          "consumes" : [ "application/x-www-form-urlencoded" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "headersV3" : { },
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/product_POST_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "headersV3" : { },
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : {
+              "application/x-www-form-urlencoded" : {
+                "schema" : {
+                  "type" : "gateway",
+                  "schema" : "{\"type\":\"object\",\"properties\":{\"Active\":{\"type\":\"string\",\"readOnly\":false},\"Category\":{\"type\":\"string\",\"readOnly\":false},\"Description\":{\"type\":\"string\",\"readOnly\":false},\"Name\":{\"type\":\"string\",\"readOnly\":false},\"Price\":{\"type\":\"string\",\"readOnly\":false}}}"
+                },
+                "examples" : { }
+              }
+            },
+            "name" : "product_POST_1"
+          }
+        },
+        "delete" : {
+          "operationId" : "product_DELETE_1",
+          "parameters" : [ {
+            "in" : "query",
+            "parameterSchema" : {
+              "readOnly" : false,
+              "type" : "string"
+            },
+            "name" : "Name",
+            "type" : "string",
+            "required" : true
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "headersV3" : { },
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/product_DELETE_response"
+                  },
+                  "examples" : { }
+                }
+              },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            },
+            "401" : {
+              "description" : "Access Denied",
+              "headersV3" : { },
+              "content" : { },
+              "links" : { },
+              "schema" : { },
+              "examples" : { },
+              "headers" : { }
+            }
+          },
+          "mockedResponses" : { },
+          "mockedConditionsBasedCustomResponsesList" : [ ],
+          "enabled" : true,
+          "scopes" : [ ],
+          "requestBody" : {
+            "content" : { },
+            "name" : "product_DELETE_1"
+          }
+        },
+        "parameters" : [ ],
+        "scopes" : [ ],
+        "displayName" : "/product",
+        "enabled" : true
+      }
+    },
+    "securityDefinitions" : {
+      "Basic" : {
+        "description" : "",
+        "type" : "basic"
+      }
+    },
+    "definitions" : { },
+    "parameters" : { },
+    "baseUriParameters" : [ ],
+    "externalDocs" : [ ],
+    "servers" : [ {
+      "url" : "http://7ea91e8682b5:5555/product_rad",
+      "variables" : { }
+    }, {
+      "url" : "https://7ea91e8682b5:5555/product_rad",
+      "variables" : { }
+    } ],
+    "components" : {
+      "schemas" : {
+        "product_GET_response" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"Products\":{\"$ref\":\"#/components/schemas/Products\"}}}"
+        },
+        "Products" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"Active\":{\"type\":\"string\"},\"Category\":{\"type\":\"string\"},\"CreatedAt\":{\"type\":\"string\"},\"Description\":{\"type\":\"string\"},\"Name\":{\"type\":\"string\"},\"Price\":{\"type\":\"string\"},\"ProductId\":{\"type\":\"string\"},\"UpdatedAt\":{\"type\":\"string\"}}}"
+        },
+        "product_DELETE_response" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"Products\":{\"$ref\":\"#/components/schemas/Products_1\"}}}"
+        },
+        "productproductNamestockLevel_GET_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"quantity\"],\"type\":\"object\",\"properties\":{\"quantity\":{\"type\":\"string\"}}}"
+        },
+        "Products_1" : {
+          "type" : "gateway",
+          "schema" : "{\"type\":\"object\",\"properties\":{\"Active\":{\"type\":\"string\"},\"Category\":{\"type\":\"string\"},\"CreatedAt\":{\"type\":\"string\"},\"Description\":{\"type\":\"string\"},\"Name\":{\"type\":\"string\"},\"Price\":{\"type\":\"string\"},\"ProductId\":{\"type\":\"string\"},\"UpdatedAt\":{\"type\":\"string\"}}}"
+        },
+        "productproductNameupdateStock_PATCH_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"quantity\",\"statusMessage\"],\"type\":\"object\",\"properties\":{\"quantity\":{\"type\":\"string\"},\"statusMessage\":{\"type\":\"string\"}}}"
+        },
+        "product_POST_response" : {
+          "type" : "gateway",
+          "schema" : "{\"required\":[\"quantity\",\"productId\"],\"type\":\"object\",\"properties\":{\"productId\":{\"type\":\"string\"},\"quantity\":{\"type\":\"string\"}}}"
+        }
+      },
+      "responses" : { },
+      "parameters" : { },
+      "examples" : { },
+      "requestBodies" : { },
+      "headers" : { },
+      "links" : { },
+      "callbacks" : { }
+    },
+    "type" : "rest"
+  },
+  "nativeEndpoint" : [ {
+    "passSecurityHeaders" : true,
+    "uri" : "https://7ea91e8682b5:5555/product_rad",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  }, {
+    "passSecurityHeaders" : true,
+    "uri" : "http://7ea91e8682b5:5555/product_rad",
+    "connectionTimeoutDuration" : 0,
+    "alias" : false
+  } ],
+  "apiName" : "inventory_direct",
+  "apiVersion" : "v1",
+  "maturityState" : "Beta",
+  "apiGroups" : [ "Internal" ],
+  "isActive" : true,
+  "type" : "REST",
+  "owner" : "gitops",
+  "policies" : [ "f371a01f-df19-4bed-84ce-a22ac781c994" ],
+  "referencedFiles" : {
+    "product_rad.json" : "{\n  \"swagger\" : \"2.0\",\n  \"info\" : {\n    \"version\" : \"1.0\",\n    \"title\" : \"product_rad\"\n  },\n  \"host\" : \"7ea91e8682b5:5555\",\n  \"basePath\" : \"/product_rad\",\n  \"schemes\" : [ \"http\", \"https\" ],\n  \"consumes\" : [ \"application/json\" ],\n  \"produces\" : [ \"application/json\" ],\n  \"security\" : [ {\n    \"Basic\" : [ ]\n  } ],\n  \"paths\" : {\n    \"/product\" : {\n      \"get\" : {\n        \"operationId\" : \"product_GET_1\",\n        \"consumes\" : [ \"application/json\" ],\n        \"produces\" : [ \"application/json\" ],\n        \"parameters\" : [ {\n          \"name\" : \"name\",\n          \"in\" : \"query\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"schema\" : {\n              \"$ref\" : \"#/definitions/product_GET_response\"\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          }\n        }\n      },\n      \"post\" : {\n        \"operationId\" : \"product_POST_1\",\n        \"consumes\" : [ \"application/x-www-form-urlencoded\" ],\n        \"produces\" : [ \"application/json\" ],\n        \"parameters\" : [ {\n          \"name\" : \"Name\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Description\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Active\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Category\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Price\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"schema\" : {\n              \"$ref\" : \"#/definitions/product_POST_response\"\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          }\n        }\n      },\n      \"put\" : {\n        \"operationId\" : \"product_PUT_1\",\n        \"consumes\" : [ \"application/x-www-form-urlencoded\" ],\n        \"produces\" : [ \"application/json\" ],\n        \"parameters\" : [ {\n          \"name\" : \"Name\",\n          \"in\" : \"formData\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Active\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Category\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Price\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"Description\",\n          \"in\" : \"formData\",\n          \"required\" : false,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"productName\",\n          \"in\" : \"formData\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\"\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          }\n        }\n      },\n      \"delete\" : {\n        \"operationId\" : \"product_DELETE_1\",\n        \"parameters\" : [ {\n          \"name\" : \"Name\",\n          \"in\" : \"query\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"schema\" : {\n              \"$ref\" : \"#/definitions/product_DELETE_response\"\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          }\n        }\n      }\n    },\n    \"/product/{productName}/updateStock\" : {\n      \"patch\" : {\n        \"operationId\" : \"productproductNameupdateStock_PATCH_2\",\n        \"consumes\" : [ \"application/x-www-form-urlencoded\" ],\n        \"produces\" : [ \"application/json\" ],\n        \"parameters\" : [ {\n          \"name\" : \"productName\",\n          \"in\" : \"path\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"adjust\",\n          \"in\" : \"formData\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        }, {\n          \"name\" : \"quantity\",\n          \"in\" : \"formData\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"schema\" : {\n              \"$ref\" : \"#/definitions/productproductNameupdateStock_PATCH_response\"\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          }\n        }\n      }\n    },\n    \"/product/{productName}/stockLevel\" : {\n      \"get\" : {\n        \"operationId\" : \"productproductNamestockLevel_GET_3\",\n        \"produces\" : [ \"application/json\" ],\n        \"parameters\" : [ {\n          \"name\" : \"productName\",\n          \"in\" : \"path\",\n          \"required\" : true,\n          \"type\" : \"string\"\n        } ],\n        \"responses\" : {\n          \"200\" : {\n            \"description\" : \"OK\",\n            \"schema\" : {\n              \"$ref\" : \"#/definitions/productproductNamestockLevel_GET_response\"\n            }\n          },\n          \"401\" : {\n            \"description\" : \"Access Denied\"\n          }\n        }\n      }\n    }\n  },\n  \"securityDefinitions\" : {\n    \"Basic\" : {\n      \"description\" : \"\",\n      \"type\" : \"basic\"\n    }\n  },\n  \"definitions\" : {\n    \"Products_1\" : {\n      \"type\" : \"object\",\n      \"properties\" : {\n        \"ProductId\" : {\n          \"type\" : \"string\"\n        },\n        \"Name\" : {\n          \"type\" : \"string\"\n        },\n        \"Description\" : {\n          \"type\" : \"string\"\n        },\n        \"Price\" : {\n          \"type\" : \"string\"\n        },\n        \"Category\" : {\n          \"type\" : \"string\"\n        },\n        \"Active\" : {\n          \"type\" : \"string\"\n        },\n        \"CreatedAt\" : {\n          \"type\" : \"string\"\n        },\n        \"UpdatedAt\" : {\n          \"type\" : \"string\"\n        }\n      }\n    },\n    \"productproductNamestockLevel_GET_response\" : {\n      \"type\" : \"object\",\n      \"required\" : [ \"quantity\" ],\n      \"properties\" : {\n        \"quantity\" : {\n          \"type\" : \"string\"\n        }\n      }\n    },\n    \"productproductNameupdateStock_PATCH_response\" : {\n      \"type\" : \"object\",\n      \"required\" : [ \"quantity\", \"statusMessage\" ],\n      \"properties\" : {\n        \"statusMessage\" : {\n          \"type\" : \"string\"\n        },\n        \"quantity\" : {\n          \"type\" : \"string\"\n        }\n      }\n    },\n    \"Products\" : {\n      \"type\" : \"object\",\n      \"properties\" : {\n        \"ProductId\" : {\n          \"type\" : \"string\"\n        },\n        \"Name\" : {\n          \"type\" : \"string\"\n        },\n        \"Description\" : {\n          \"type\" : \"string\"\n        },\n        \"Price\" : {\n          \"type\" : \"string\"\n        },\n        \"Category\" : {\n          \"type\" : \"string\"\n        },\n        \"Active\" : {\n          \"type\" : \"string\"\n        },\n        \"CreatedAt\" : {\n          \"type\" : \"string\"\n        },\n        \"UpdatedAt\" : {\n          \"type\" : \"string\"\n        }\n      }\n    },\n    \"product_POST_response\" : {\n      \"type\" : \"object\",\n      \"required\" : [ \"productId\", \"quantity\" ],\n      \"properties\" : {\n        \"productId\" : {\n          \"type\" : \"string\"\n        },\n        \"quantity\" : {\n          \"type\" : \"string\"\n        }\n      }\n    },\n    \"product_GET_response\" : {\n      \"type\" : \"object\",\n      \"properties\" : {\n        \"Products\" : {\n          \"$ref\" : \"#/definitions/Products\"\n        }\n      }\n    },\n    \"product_DELETE_response\" : {\n      \"type\" : \"object\",\n      \"properties\" : {\n        \"Products\" : {\n          \"$ref\" : \"#/definitions/Products_1\"\n        }\n      }\n    }\n  }\n}\n"
+  },
+  "tracingEnabled" : false,
+  "scopes" : [ ],
+  "publishedPortals" : [ ],
+  "creationDate" : "2024-06-03 20:43:41 GMT",
+  "lastModified" : "2024-06-20 07:57:48 GMT",
+  "systemVersion" : 1,
+  "gatewayEndpoints" : { },
+  "id" : "e72171a7-fb13-4473-a34c-c2bdeabd0789"
+}
