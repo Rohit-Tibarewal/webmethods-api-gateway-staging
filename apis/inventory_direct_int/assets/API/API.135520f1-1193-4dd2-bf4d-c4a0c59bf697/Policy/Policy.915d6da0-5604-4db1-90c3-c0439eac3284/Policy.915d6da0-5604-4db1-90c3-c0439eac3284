@@ -1,0 +1,31 @@
+{
+  "id" : "915d6da0-5604-4db1-90c3-c0439eac3284",
+  "names" : [ {
+    "value" : "Default Policy for API inventory_direct_int",
+    "locale" : "English"
+  } ],
+  "descriptions" : [ {
+    "value" : "",
+    "locale" : "English"
+  } ],
+  "scope" : {
+    "scopeConditions" : [ ]
+  },
+  "policyEnforcements" : [ {
+    "enforcements" : [ {
+      "enforcementObjectId" : "0b3239dc-160b-44e0-a6f2-9c34504edd1a",
+      "order" : "0"
+    } ],
+    "stageKey" : "routing"
+  }, {
+    "enforcements" : [ {
+      "enforcementObjectId" : "7778e862-7c99-4e2a-96b2-e075820399cc",
+      "order" : "0"
+    } ],
+    "stageKey" : "transport"
+  } ],
+  "policyScope" : "SERVICE",
+  "systemPolicy" : false,
+  "global" : false,
+  "active" : false
+}
