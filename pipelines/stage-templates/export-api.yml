@@ -49,9 +49,9 @@ stages:
               clean: "true"
             - download: none
             - bash: |
-                ls -lrt $(Agent.BuildDirectory)\s
-                ls -lrt $(Agent.BuildDirectory)\s\webmethods-api-gateway-staging\apis
-                ls -lrt $(Agent.BuildDirectory)\s\Hybrid_IO_Sync_IPaaS\assets\apigateway\apiprojects
+                ls -lrt $(Agent.BuildDirectory)/s
+                ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
+                ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects
             
             - task: CopyFiles@2
               inputs:
@@ -61,9 +61,9 @@ stages:
                 OverWrite: true
 
             - bash: |
-                ls -lrt $(Agent.BuildDirectory)\s
-                ls -lrt $(Agent.BuildDirectory)\s\webmethods-api-gateway-staging\apis
-                ls -lrt $(Agent.BuildDirectory)\s\Hybrid_IO_Sync_IPaaS\assets\apigateway\apiprojects
+                ls -lrt $(Agent.BuildDirectory)/s
+                ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
+                ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects
 
             - template: /pipelines/step-templates/export-api.yml
               parameters:
