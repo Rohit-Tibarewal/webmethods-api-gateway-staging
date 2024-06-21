@@ -48,12 +48,16 @@ stages:
               persistCredentials: "true"
               clean: "true"
             - download: none
+            - bash: |
+                ls -lrt $(Agent.BuildDirectory)\s
+                ls -lrt $(Agent.BuildDirectory)\s\webmethods-api-gateway-staging\apis
+                ls -lrt $(Agent.BuildDirectory)\s\Hybrid_IO_Sync_IPaaS\assets\apigateway\apiprojects
             
             - task: CopyFiles@2
               inputs:
-                SourceFolder: '$(Agent.BuildDirectory)\s\Hybrid_IO_Sync_IPaaS\assets\apigateway\apiprojects'
+                SourceFolder: '$(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects'
                 Contents: '**'
-                TargetFolder: '$(Agent.BuildDirectory)\s\webmethods-api-gateway-staging\apis'
+                TargetFolder: '$(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis'
                 OverWrite: true
 
             - bash: |
