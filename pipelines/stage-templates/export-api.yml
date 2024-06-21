@@ -21,6 +21,14 @@ parameters:
 - name: commit_message
   type: string
 
+resources:
+  repositories:
+  - repository: Hybrid_IO_Sync_IPaaS
+    type: github
+    endpoint: APIGW_AssetsRepo_Github
+    name: wMTiG/Hybrid_IO_Sync_IPaaS
+    ref: dev
+
 stages:
 - stage: Export_${{parameters.selected_api_project}}_from_${{parameters.design_stage.name}}
   jobs:
@@ -43,7 +51,24 @@ stages:
               persistCredentials: "true"
               clean: "true"
               fetchDepth: 0
+            - checkout: 
+              submodules: "true"
+              persistCredentials: "true"
+              clean: "true"
             - download: none
+            
+            - task: CopyFiles@2
+              inputs:
+                SourceFolder: '$(Agent.BuildDirectory)\s\Hybrid_IO_Sync_IPaaS\assets\apigateway\apiprojects'
+                Contents: '**'
+                TargetFolder: '$(Agent.BuildDirectory)\s\webmethods-api-gateway-staging\apis'
+                OverWrite: true
+
+            - bash: |
+                ls -lrt $(Agent.BuildDirectory)\s
+                ls -lrt $(Agent.BuildDirectory)\s\webmethods-api-gateway-staging\apis
+                ls -lrt $(Agent.BuildDirectory)\s\Hybrid_IO_Sync_IPaaS\assets\apigateway\apiprojects
+
             - template: /pipelines/step-templates/export-api.yml
               parameters:
                 environment_set: ${{parameters.environment_set}}
