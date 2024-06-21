@@ -1,5 +1,13 @@
 trigger: none
 
+resources:
+  repositories:
+  - repository: Hybrid_IO_Sync_IPaaS
+    type: github
+    endpoint: APIGW_AssetsRepo_Github
+    name: wMTiG/Hybrid_IO_Sync_IPaaS
+    ref: dev
+    
 parameters:
 - name: selected_api_project
   displayName: Export which API project?
