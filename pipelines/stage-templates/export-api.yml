@@ -1,11 +1,3 @@
-resources:
-  repositories:
-  - repository: Hybrid_IO_Sync_IPaaS
-    type: github
-    endpoint: APIGW_AssetsRepo_Github
-    name: wMTiG/Hybrid_IO_Sync_IPaaS
-    ref: dev
-
 parameters:
 - name: design_stage
   type: object
