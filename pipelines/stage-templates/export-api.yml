@@ -52,7 +52,9 @@ stages:
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
                 ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects
-            
+                echo "name = $[ resources.repositories.Hybrid_IO_Sync_IPaaS.name ]"
+                echo "url = $[ resources.repositories.Hybrid_IO_Sync_IPaaS.url ]"
+           
             - task: CopyFiles@2
               inputs:
                 SourceFolder: '$(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects'
