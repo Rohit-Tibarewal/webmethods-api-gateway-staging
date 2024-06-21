@@ -51,7 +51,7 @@ stages:
               persistCredentials: "true"
               clean: "true"
               fetchDepth: 0
-            - checkout: 
+            - checkout: Hybrid_IO_Sync_IPaaS
               submodules: "true"
               persistCredentials: "true"
               clean: "true"
