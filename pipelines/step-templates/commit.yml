@@ -6,7 +6,7 @@ steps:
 - bash: |
     git config --global user.email '$(Build.RequestedForEmail)'
     git config --global user.name '$(Build.RequestedFor)'
-  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/Hybrid_IO_Sync_IPaaS'
   displayName: "Set Git user e-mail and name"
   
 
@@ -14,5 +14,5 @@ steps:
     git add .
     git commit -m '${{parameters.commit_message}}'
     git push origin 'HEAD:$(Build.SourceBranchName)'
-  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/Hybrid_IO_Sync_IPaaS'
   displayName: "Git add, commit and push"
