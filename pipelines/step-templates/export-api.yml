@@ -12,7 +12,7 @@ steps:
    echo "##vso[task.setvariable variable=environment_protocol]`jq -r '.values[] | select(.key == "protocol") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
    echo "##vso[task.setvariable variable=environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
    echo "##vso[task.setvariable variable=environment_insecure_flag]`jq -r '.values[] | select(.key == "insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
-  workingDirectory: '$(System.DefaultWorkingDirectory)/s/webmethods-api-gateway-staging'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract ip, hostname, port and insecure_flag'
 
 - bash: |
@@ -22,21 +22,21 @@ steps:
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(environment_protocol)://$(environment_hostname):$(environment_port)/rest/apigateway/archive
-  workingDirectory: '$(System.DefaultWorkingDirectory)/s/webmethods-api-gateway-staging'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Export the deployable from API Gateway ${{parameters.environment_name}}'
   env:
     no_proxy: $(environment_hostname)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/s/webmethods-api-gateway-staging/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
+    pathToPublish: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
     artifactName: '${{parameters.stage_name}}_${{parameters.api_project}}_export'
   displayName: 'Publish export result to pipeline build'
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/s/webmethods-api-gateway-staging/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
-    destinationFolder: '$(System.DefaultWorkingDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.api_project}}/assets'
+    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/apis/${{parameters.api_project}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 
@@ -44,7 +44,7 @@ steps:
 
 - task: DeleteFiles@1
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/s/webmethods-api-gateway-staging'
+    SourceFolder: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
     Contents: '$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip' 
     #RemoveSourceFolder: # Optional
   displayName: 'Remove the API deployable again'
