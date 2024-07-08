@@ -13,6 +13,6 @@ steps:
 - bash: |
     git add .
     git commit -m '${{parameters.commit_message}}'
-    git push origin 'HEAD:$(Build.SourceBranchName)'
+    git push origin refs/heads/$(Build.SourceBranchName)
   workingDirectory: '$(System.DefaultWorkingDirectory)/Hybrid_IO_Sync_IPaaS'
   displayName: "Git add, commit and push"
