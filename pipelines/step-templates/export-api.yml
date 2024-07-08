@@ -44,9 +44,9 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.selected_api_project}}'
+    SourceFolder: '$(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.api_project}}'
     Contents: '**'
-    TargetFolder: '$(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects/${{parameters.selected_api_project}}'
+    TargetFolder: '$(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects/${{parameters.api_project}}'
     OverWrite: true
     displayName: 'Copy files to external assets Repo '
     
