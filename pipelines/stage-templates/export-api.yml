@@ -52,20 +52,20 @@ stages:
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
                 ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects
-                echo "name = $[ resources.repositories.Hybrid_IO_Sync_IPaaS.name ]"
-                echo "url = $[ resources.repositories.Hybrid_IO_Sync_IPaaS.url ]"
-           
+                
             - task: CopyFiles@2
               inputs:
-                SourceFolder: '$(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects'
+                SourceFolder: '$(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects/${{parameters.selected_api_project}}'
                 Contents: '**'
-                TargetFolder: '$(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis'
+                TargetFolder: '$(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.selected_api_project}}'
                 OverWrite: true
 
             - bash: |
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
                 ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects
+                ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.selected_api_project}}
+                ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects/${{parameters.selected_api_project}}
 
             - template: /pipelines/step-templates/export-api.yml
               parameters:
