@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<asset_composite name="APIGatewayAssets" displayName="Assets for API Gateway" runtimeVersion="10.15" targetNamespace="http://namespaces.softwareag.com/webMethods/APIGateway" xmlns="http://namespaces.softwareag.com/acdl/1.0" xmlns:EDA="http://namespaces.softwareag.com/webMethods/EDA" xmlns:MWS="http://namespaces.softwareag.com/webMethods/MWS" xmlns:IS="http://namespaces.softwareag.com/webMethods/IS" xmlns:APIPORTAL="http://namespaces.softwareag.com/webMethods/APIPORTAL" xmlns:AgileApps="http://namespaces.softwareag.com/webMethods/AgileApps" xmlns:BROKER="http://namespaces.softwareag.com/webMethods/BROKER" xmlns:implDetails="http://namespaces.softwareag.com/acdl/implDetails" xmlns:UniversalMessaging="http://namespaces.softwareag.com/webMethods/UniversalMessaging" xmlns:TN="http://namespaces.softwareag.com/webMethods/TN" xmlns:RULES="http://namespaces.softwareag.com/webMethods/RULES" xmlns:BPM="http://namespaces.softwareag.com/webMethods/BPM" xmlns:Optimize="http://namespaces.softwareag.com/webMethods/Optimize">
+    <buildInfo name="BuildTimestamp" value="2024-07-08T18:47:02"/>
+    <asset name="API.20c48aa4-7eb5-4317-8089-16e879497c63" displayName="inventory[v1]" isDeployable="true">
+        <implementation.generic type="API"/>
+        <dependsOn>APIGateway:Policy.763646df-77e3-4021-9af4-5ae4752787fc</dependsOn>
+        <dependsOn>APIGateway:RegisteredApplication.EmptyRegisteredApplication</dependsOn>
+    </asset>
+    <asset name="Policy.763646df-77e3-4021-9af4-5ae4752787fc" displayName="Policy For API inventory[v1]" isDeployable="true">
+        <implementation.generic type="Policy"/>
+        <dependsOn>APIGateway:PolicyAction.2a55b5e0-1b01-47e7-a237-b107dbd766c0</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.d20d3f03-56b6-4d19-bd13-51e4699cac5e</dependsOn>
+        <dependsOn>APIGateway:PolicyAction.e4665369-a747-4c37-b88b-6db34421670b</dependsOn>
+    </asset>
+    <asset name="PolicyAction.2a55b5e0-1b01-47e7-a237-b107dbd766c0" displayName="Policy Action [Straight Through Routing] -&gt; Policy For API inventory[v1]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.9be94276-53ae-4aca-a470-49d1ad4b1691</dependsOn>
+    </asset>
+    <asset name="Alias.9be94276-53ae-4aca-a470-49d1ad4b1691" displayName="wmio_int" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <property name="value for Simple alias wmio_int" many="false" isSecure="false" displayName="value for Simple alias wmio_int">
+            <value>https://psdev.int.webmethods</value>
+        </property>
+    </asset>
+    <asset name="PolicyAction.d20d3f03-56b6-4d19-bd13-51e4699cac5e" displayName="Policy Action [Outbound Auth - Transport] -&gt; Policy For API inventory[v1]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+        <dependsOn>APIGateway:Alias.8acfeaba-e888-44c4-91e6-5f581e6baf1e</dependsOn>
+    </asset>
+    <asset name="Alias.8acfeaba-e888-44c4-91e6-5f581e6baf1e" displayName="NativeCredentials" isDeployable="true">
+        <implementation.generic type="Alias"/>
+        <dependsOn>APIGateway:PassmanData.HTTP_AUTH_OUTBOUND_CLIENT_PWDNativeCredentials</dependsOn>
+        <property name="Username for HTTP Transport Security Alias NativeCredentials" many="false" isSecure="false" displayName="Username for HTTP Transport Security Alias NativeCredentials">
+            <value>gitops</value>
+        </property>
+        <property name="Password for HTTP Transport Security Alias NativeCredentials" many="false" isSecure="true" displayName="Password for HTTP Transport Security Alias NativeCredentials">
+            <value>{AES}vDt83fIfdPbOEh8vBitePrw7fN3yH3T2zhIfLwYrXj5pitcLjd1NawNQdFYbmaFM</value>
+        </property>
+    </asset>
+    <asset name="PassmanData.HTTP_AUTH_OUTBOUND_CLIENT_PWDNativeCredentials" displayName="HTTP_AUTH_OUTBOUND_CLIENT_PWDNativeCredentials" isDeployable="true">
+        <implementation.generic type="PassmanData"/>
+    </asset>
+    <asset name="PolicyAction.e4665369-a747-4c37-b88b-6db34421670b" displayName="Policy Action [Enable HTTP / HTTPS] -&gt; Policy For API inventory[v1]" isDeployable="true">
+        <implementation.generic type="PolicyAction"/>
+    </asset>
+    <asset name="RegisteredApplication.EmptyRegisteredApplication" displayName="RegisteredApplication [ EmptyRegisteredApplication ]" isDeployable="true">
+        <implementation.generic type="RegisteredApplication"/>
+    </asset>
+</asset_composite>

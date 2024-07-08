@@ -1,0 +1,12 @@
+{
+  "id" : "8acfeaba-e888-44c4-91e6-5f581e6baf1e",
+  "name" : "NativeCredentials",
+  "type" : "httpTransportSecurityAlias",
+  "owner" : "raup",
+  "authType" : "HTTP_BASIC",
+  "authMode" : "NEW",
+  "httpAuthCredentials" : {
+    "userName" : "gitops",
+    "password" : "KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKio="
+  }
+}
