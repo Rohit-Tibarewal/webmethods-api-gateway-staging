@@ -5,7 +5,7 @@
   "scope": [
     {
       "attributeName": "apiName",
-      "keyword": "inventory"
+      "keyword": "incorrect_inventory"
     }
   ]
 }
