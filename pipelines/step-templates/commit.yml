@@ -6,12 +6,13 @@ steps:
 - bash: |
     git config --global user.email '$(Build.RequestedForEmail)'
     git config --global user.name '$(Build.RequestedFor)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: "Set Git user e-mail and name"
-  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging
+  
 
 - bash: |
     git add .
     git commit -m '${{parameters.commit_message}}'
     git push origin 'HEAD:$(Build.SourceBranchName)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: "Git add, commit and push"
-  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging
