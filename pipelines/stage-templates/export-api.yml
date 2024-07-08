@@ -52,6 +52,7 @@ stages:
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
                 ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects
+                cat $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.selected_api_project}}/export_payload.json
                 
             - task: CopyFiles@2
               inputs:
@@ -66,6 +67,7 @@ stages:
                 ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.selected_api_project}}
                 ls -lrt $(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects/${{parameters.selected_api_project}}
+                cat $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.selected_api_project}}/export_payload.json
 
             - template: /pipelines/step-templates/export-api.yml
               parameters:
