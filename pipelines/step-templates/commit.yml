@@ -11,6 +11,8 @@ steps:
   
 
 - bash: |
+    git remote -v
+    git branch -a
     git add .
     git commit -m '${{parameters.commit_message}}'
     git push origin dev
