@@ -4,7 +4,10 @@ parameters:
 - name: environment_file
 - name: stage_name
 - name: environment_name
-
+variables:
+- name: checkedoutAPIGWAssetsPath
+  value: $(Agent.BuildDirectory)/APIGWASSETS_REPO
+  
 steps:
 - bash: |
    echo "##vso[task.setvariable variable=environment_hostname]`jq -r '.values[] | select(.key == "hostname") | .value' environments/${{parameters.environment_set}}/${{parameters.environment_file}}`"
@@ -17,42 +20,34 @@ steps:
 
 - bash: |
    curl -v $(environment_insecure_flag) \
-          -d @"apis/${{parameters.api_project}}/export_payload.json" \
+          -d @"assets/apigateway/apiprojects/${{parameters.api_project}}/export_payload.json" \
           --output $(Build.BuildId)_export_from_${{parameters.environment_name}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(environment_protocol)://$(environment_hostname):$(environment_port)/rest/apigateway/archive
-  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
+  workingDirectory: '$(checkedoutAPIGWAssetsPath)'
   displayName: 'Export the deployable from API Gateway ${{parameters.environment_name}}'
   env:
     no_proxy: $(environment_hostname)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
+    pathToPublish: '$(checkedoutAPIGWAssetsPath)/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
     artifactName: '${{parameters.stage_name}}_${{parameters.api_project}}_export'
   displayName: 'Publish export result to pipeline build'
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
-    destinationFolder: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/apis/${{parameters.api_project}}/assets'
+    archiveFilePatterns: '$(checkedoutAPIGWAssetsPath)/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
+    destinationFolder: '$(checkedoutAPIGWAssetsPath)/assets/apigateway/apiprojects/${{parameters.api_project}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 
   displayName: 'Extract the flat representation from the API deployable for API project ${{parameters.api_project}}'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.api_project}}'
-    Contents: '**'
-    TargetFolder: '$(Agent.BuildDirectory)/s/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}'
-    OverWrite: true
-    displayName: 'Copy files to external assets Repo '
     
 - task: DeleteFiles@1
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
+    SourceFolder: '$(checkedoutAPIGWAssetsPath)'
     Contents: '$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip' 
     #RemoveSourceFolder: # Optional
   displayName: 'Remove the API deployable again'
