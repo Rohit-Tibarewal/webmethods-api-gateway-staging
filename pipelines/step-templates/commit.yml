@@ -6,7 +6,7 @@ steps:
 - bash: |
     git config --global user.email '$(Build.RequestedForEmail)'
     git config --global user.name '$(Build.RequestedFor)'
-  workingDirectory: '$(System.DefaultWorkingDirectory)/Hybrid_IO_Sync_IPaaS'
+  workingDirectory: '$(Agent.BuildDirectory)/APIGWASSETS_REPO'
   displayName: "Set Git user e-mail and name"
   
 
@@ -17,5 +17,5 @@ steps:
     git add .
     git commit -m '${{parameters.commit_message}}'
     git push -u origin dev
-  workingDirectory: '$(System.DefaultWorkingDirectory)/Hybrid_IO_Sync_IPaaS'
+  workingDirectory: '$(Agent.BuildDirectory)/APIGWASSETS_REPO'
   displayName: "Git add, commit and push"
