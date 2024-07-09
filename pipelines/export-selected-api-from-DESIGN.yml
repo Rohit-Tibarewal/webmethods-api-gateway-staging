@@ -7,7 +7,9 @@ resources:
     endpoint: APIGW_AssetsRepo_Github
     name: wMTiG/Hybrid_IO_Sync_IPaaS
     ref: dev
-    
+    fetch:
+      ref: 'refs/heads/dev'
+      Depth: 1
 parameters:
 - name: selected_api_project
   displayName: Export which API project?
