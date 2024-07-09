@@ -47,15 +47,14 @@ stages:
               submodules: "true"
               persistCredentials: "true"
               clean: "true"
+              path: $(Agent.BuildDirectory)/s/APIGWASSETS_REPO
             - download: none
             - bash: |
+                ls -lrt $(Agent.BuildDirectory)
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
                 ls -lrt $(Agent.BuildDirectory)/s/APIGWASSETS_REPO/assets/apigateway/apiprojects
                 cat $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.selected_api_project}}/export_payload.json
-                echo "extreporef is $[ resources.repositories.APIGWASSETS_REPO.ref ]"
-                echo "extreponame is $[ resources.repositories.APIGWASSETS_REPO.name ]"
-                echo "extrepourl is $[ resources.repositories.APIGWASSETS_REPO.url ]"
                 
             - task: CopyFiles@2
               inputs:
