@@ -3,6 +3,6 @@
   "name" : "aws_int",
   "description" : "This is a simple alias on #{stage_name}# environment",
   "type" : "simple",
-  "owner" : "roti",
-  "value" : "#{aws_int_url}#"
+  "owner" : "kaba",
+  "value" : "http://psdev.link0.privatelink"
 }

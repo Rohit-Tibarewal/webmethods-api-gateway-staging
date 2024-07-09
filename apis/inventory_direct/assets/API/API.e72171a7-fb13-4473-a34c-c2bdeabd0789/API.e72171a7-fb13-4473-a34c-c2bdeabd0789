@@ -339,10 +339,8 @@
     "baseUriParameters" : [ ],
     "externalDocs" : [ ],
     "servers" : [ {
-      "url" : "http://7ea91e8682b5:5555/product_rad",
-      "variables" : { }
-    }, {
-      "url" : "https://7ea91e8682b5:5555/product_rad",
+      "url" : "http://psdev.link0.privatelink/product_rad",
+      "description" : "replaced http://7ea91e8682b5:5555/product_rad",
       "variables" : { }
     } ],
     "components" : {
@@ -388,12 +386,7 @@
   },
   "nativeEndpoint" : [ {
     "passSecurityHeaders" : true,
-    "uri" : "https://7ea91e8682b5:5555/product_rad",
-    "connectionTimeoutDuration" : 0,
-    "alias" : false
-  }, {
-    "passSecurityHeaders" : true,
-    "uri" : "http://7ea91e8682b5:5555/product_rad",
+    "uri" : "http://psdev.link0.privatelink/product_rad",
     "connectionTimeoutDuration" : 0,
     "alias" : false
   } ],
@@ -412,8 +405,9 @@
   "scopes" : [ ],
   "publishedPortals" : [ ],
   "creationDate" : "2024-06-03 20:43:41 GMT",
-  "lastModified" : "2024-06-20 07:57:48 GMT",
+  "lastModified" : "2024-06-28 18:20:51 GMT",
   "systemVersion" : 1,
   "gatewayEndpoints" : { },
+  "deployments" : [ "APIGateway" ],
   "id" : "e72171a7-fb13-4473-a34c-c2bdeabd0789"
 }
