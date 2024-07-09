@@ -1,6 +1,3 @@
-variables:
-  checkedoutAPIGWAssetsPath: "/home/vsts/work/1/APIGWASSETS_REPO"
-
 parameters:
 - name: environment_set
 - name: api_project
@@ -25,21 +22,21 @@ steps:
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(environment_protocol)://$(environment_hostname):$(environment_port)/rest/apigateway/archive
-  workingDirectory: '$(checkedoutAPIGWAssetsPath)'
+  workingDirectory: '$(Agent.BuildDirectory)/APIGWASSETS_REPO'
   displayName: 'Export the deployable from API Gateway ${{parameters.environment_name}}'
   env:
     no_proxy: $(environment_hostname)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(checkedoutAPIGWAssetsPath)/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
+    pathToPublish: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
     artifactName: '${{parameters.stage_name}}_${{parameters.api_project}}_export'
   displayName: 'Publish export result to pipeline build'
 
 - task: ExtractFiles@1
   inputs:
-    archiveFilePatterns: '$(checkedoutAPIGWAssetsPath)/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
-    destinationFolder: '$(checkedoutAPIGWAssetsPath)/assets/apigateway/apiprojects/${{parameters.api_project}}/assets'
+    archiveFilePatterns: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
+    destinationFolder: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 
@@ -47,7 +44,7 @@ steps:
     
 - task: DeleteFiles@1
   inputs:
-    SourceFolder: '$(checkedoutAPIGWAssetsPath)'
+    SourceFolder: '$(Agent.BuildDirectory)/APIGWASSETS_REPO'
     Contents: '$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip' 
     #RemoveSourceFolder: # Optional
   displayName: 'Remove the API deployable again'
