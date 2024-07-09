@@ -30,26 +30,18 @@ parameters:
 - name: commit_message
   displayName: Message for the commit in Git?
   type: string
-- name: apigwassets_org
-  displayName: Organization Name where APIGW repositories are created
-  type: string
-  default: wMTiG
-- name: apigwassets_reponame
-  displayName: APIGW project's repository name
-  type: string
-  default: Hybrid_IO_Sync_IPaaS
-- name: apigwassets_repo_branchname
-  displayName: APIGW project's repository branch name
-  type: string
-  default: dev
+
+variables:
+- name: repoPath
+  value: $(apigwassets_org)/$(apigwassets_reponame)
 
 resources:
   repositories:
   - repository: APIGWASSETS_REPO
     type: github
     endpoint: APIGW_AssetsRepo_Github
-    name: ${{ parameters.apigwassets_org }}/${{ parameters.apigwassets_reponame }}
-    ref: refs/heads/${{ parameters.apigwassets_repo_branchname }}
+    name: $(repoPath)
+    ref: refs/heads/$(apigwassets_repo_branchname)
 
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
