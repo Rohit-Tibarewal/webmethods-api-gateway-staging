@@ -13,7 +13,7 @@ steps:
 - bash: |
     git remote -v
     git branch -a
-    git branch -m dev --force
+    git switch -c dev
     git add .
     git commit -m '${{parameters.commit_message}}'
     git push -u origin dev
