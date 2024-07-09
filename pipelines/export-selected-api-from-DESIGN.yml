@@ -2,7 +2,7 @@ trigger: none
 
 resources:
   repositories:
-  - repository: ${{ parameters.apigwassets_reponame }}
+  - repository: APIGWASSETS_REPO
     type: github
     endpoint: APIGW_AssetsRepo_Github
     name: ${{ parameters.apigwassets_org }}/${{ parameters.apigwassets_reponame }}
