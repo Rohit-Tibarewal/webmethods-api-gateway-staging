@@ -1,12 +1,5 @@
 trigger: none
 
-resources:
-  repositories:
-  - repository: APIGWASSETS_REPO
-    type: github
-    endpoint: APIGW_AssetsRepo_Github
-    name: "${{ parameters.apigwassets_org }}/${{ parameters.apigwassets_reponame }}"
-    ref: "refs/heads/${{ parameters.apigwassets_repo_branchname }}"
 parameters:
 - name: selected_api_project
   displayName: Export which API project?
@@ -49,6 +42,14 @@ parameters:
   displayName: APIGW project's repository branch name
   type: string
   default: dev
+
+resources:
+  repositories:
+  - repository: APIGWASSETS_REPO
+    type: github
+    endpoint: APIGW_AssetsRepo_Github
+    name: ${{ parameters.apigwassets_org }}/${{ parameters.apigwassets_reponame }}
+    ref: refs/heads/${{ parameters.apigwassets_repo_branchname }}
 
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
