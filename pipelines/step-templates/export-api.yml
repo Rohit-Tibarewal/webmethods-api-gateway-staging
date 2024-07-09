@@ -46,7 +46,7 @@ steps:
   inputs:
     SourceFolder: '$(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis/${{parameters.api_project}}'
     Contents: '**'
-    TargetFolder: '$(Agent.BuildDirectory)/s/Hybrid_IO_Sync_IPaaS/assets/apigateway/apiprojects/${{parameters.api_project}}'
+    TargetFolder: '$(Agent.BuildDirectory)/s/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}'
     OverWrite: true
     displayName: 'Copy files to external assets Repo '
     
