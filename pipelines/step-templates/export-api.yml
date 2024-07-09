@@ -1,5 +1,5 @@
 variables:
-  checkedoutAPIGWAssetsPath: "$(Agent.BuildDirectory)/APIGWASSETS_REPO"
+  checkedoutAPIGWAssetsPath: "/home/vsts/work/1/APIGWASSETS_REPO"
 
 parameters:
 - name: environment_set
