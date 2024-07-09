@@ -2,14 +2,11 @@ trigger: none
 
 resources:
   repositories:
-  - repository: Hybrid_IO_Sync_IPaaS
+  - repository: ${{parameters.apigwassets_reponame}}
     type: github
     endpoint: APIGW_AssetsRepo_Github
-    name: wMTiG/Hybrid_IO_Sync_IPaaS
-    ref: dev
-    fetch:
-      ref: 'refs/heads/dev'
-      Depth: 1
+    name: ${{parameters.apigwassets_org}}/${{parameters.apigwassets_reponame}}
+    ref: refs/heads/${{parameters.apigwassets_repo_branchname}}
 parameters:
 - name: selected_api_project
   displayName: Export which API project?
@@ -40,7 +37,18 @@ parameters:
 - name: commit_message
   displayName: Message for the commit in Git?
   type: string
-
+- name: apigwassets_org
+  displayName: Organization Name where APIGW repositories are created
+  type: string
+  default: wMTiG
+- name: apigwassets_reponame
+  displayName: APIGW project's repository name
+  type: string
+  default: Hybrid_IO_Sync_IPaaS
+- name: apigwassets_repo_branchname
+  displayName: APIGW project's repository branch name
+  type: string
+  default: dev
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
 stages:
