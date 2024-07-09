@@ -13,8 +13,9 @@ steps:
 - bash: |
     git remote -v
     git branch -a
+    git branch -m dev --force
     git add .
     git commit -m '${{parameters.commit_message}}'
-    git push origin dev
+    git push -u origin dev
   workingDirectory: '$(System.DefaultWorkingDirectory)/Hybrid_IO_Sync_IPaaS'
   displayName: "Git add, commit and push"
