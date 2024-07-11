@@ -1,13 +1,13 @@
 parameters:
-- name: repoPath
-- name: repo_branchname
+- name: agwassets_repo_path
+- name: agwassets_repo_branchname
 resources:
   repositories:
   - repository: APIGWASSETS_REPO
     type: github
     endpoint: APIGW_AssetsRepo_Github
-    name: $(repoPath)
-    ref: refs/heads/$(repo_branchname)
+    name: ${{parameters.agwassets_repo_path}}
+    ref: refs/heads/${{parameters.agwassets_repo_branchname}}
 steps:
   - checkout: self
     submodules: "true"
