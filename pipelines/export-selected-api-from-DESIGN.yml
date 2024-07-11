@@ -3,12 +3,11 @@ trigger: none
 variables:
 - name: repoPath
   value: $(apigwassets_org)/$(apigwassets_reponame)
-- name: apigwassets_repo_alias
-  value: APIGWASSETS_REPO
+  apigwassets_repo_alias: 'APIGWASSETS_REPO'
     
 resources:
   repositories:
-  - repository: APIGWASSETS_REPO
+  - repository: $(apigwassets_repo_alias)
     type: github
     endpoint: APIGW_AssetsRepo_Github
     name: $(repoPath)
