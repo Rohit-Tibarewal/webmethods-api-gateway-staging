@@ -38,6 +38,11 @@ stages:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
             steps:
+             variables:
+              APIGWASSETS_REPOref: $[ resources.repositories.APIGWASSETS_REPO.ref ]
+              APIGWASSETS_REPOname: $[ resources.repositories.APIGWASSETS_REPO.name ]
+              APIGWASSETS_REPOtype: $[ resources.repositories.APIGWASSETS_REPO.type ]
+              APIGWASSETS_REPOurl: $[ resources.repositories.APIGWASSETS_REPO.url ]
             - checkout: self
               submodules: "true"
               persistCredentials: "true"
@@ -50,6 +55,11 @@ stages:
               path: APIGWASSETS_REPO
             - download: none
             - bash: |
+                echo "name = $(APIGWASSETS_REPOname)"
+                echo "ref = $(APIGWASSETS_REPOref)"
+                echo "type = $(APIGWASSETS_REPOtype)"
+                echo "url = $(APIGWASSETS_REPOurl)"
+                echo "version = $(version)"
                 ls -lrt $(Agent.BuildDirectory)
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
