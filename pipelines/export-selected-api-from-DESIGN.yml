@@ -1,10 +1,8 @@
 trigger: none
 
 variables:
-- name: repoPath
-  value: $(apigwassets_org)/$(apigwassets_reponame)
-- name: apigwassets_repo_alias
-  value: 'APIGWASSETS_REPO'
+  repoPath: 'wMTiG/Hybrid_IO_Sync_IPaaS'
+  apigwassets_repo_alias: 'APIGWASSETS_REPO'	
     
 resources:
   repositories:
