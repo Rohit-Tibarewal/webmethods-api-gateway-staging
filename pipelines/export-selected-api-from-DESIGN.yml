@@ -45,9 +45,9 @@ parameters:
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
 stages:
-- stage: Print Repo details
+- stage: PrintRepodetails
   jobs: 
-  - job: print
+  - job: PrintJob
     steps:
     - bash: |
         echo repo ref is $[ resources.repositories['APIGWASSETS_REPO'].ref ]
