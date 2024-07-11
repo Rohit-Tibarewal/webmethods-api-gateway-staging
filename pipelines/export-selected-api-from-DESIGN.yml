@@ -1,5 +1,17 @@
 trigger: none
 
+variables:
+- name: repoPath
+  value: $(apigwassets_org)/$(apigwassets_reponame)
+
+resources:
+  repositories:
+  - repository: APIGWASSETS_REPO
+    type: github
+    endpoint: APIGW_AssetsRepo_Github
+    name: $(repoPath)
+    ref: refs/heads/$(apigwassets_repo_branchname)
+
 parameters:
 - name: selected_api_project
   displayName: Export which API project?
@@ -30,18 +42,6 @@ parameters:
 - name: commit_message
   displayName: Message for the commit in Git?
   type: string
-
-variables:
-- name: repoPath
-  value: $(apigwassets_org)/$(apigwassets_reponame)
-
-resources:
-  repositories:
-  - repository: APIGWASSETS_REPO
-    type: github
-    endpoint: APIGW_AssetsRepo_Github
-    name: $(repoPath)
-    ref: refs/heads/$(apigwassets_repo_branchname)
 
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
