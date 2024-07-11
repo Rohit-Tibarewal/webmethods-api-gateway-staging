@@ -1,12 +1,12 @@
 trigger: none
 
 variables:
-  repoPath: 'wMTiG/Hybrid_IO_Sync_IPaaS'
-  apigwassets_repo_alias: 'APIGWASSETS_REPO'	
+- name: repoPath
+  value: $(apigwassets_org)/$(apigwassets_reponame)
     
 resources:
   repositories:
-  - repository: $(apigwassets_repo_alias)
+  - repository: APIGWASSETS_REPO
     type: github
     endpoint: APIGW_AssetsRepo_Github
     name: $(repoPath)
