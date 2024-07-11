@@ -3,6 +3,11 @@ trigger: none
 variables:
 - name: repoPath
   value: $(apigwassets_org)/$(apigwassets_reponame)
+resources:
+  repositories: /pipelines/checkout-multi-template.yml
+  parameters:
+    agwassets_repo_path: $(repoPath)
+    agwassets_repo_branchname: $(apigwassets_repo_branchname) 
 
 parameters:
 - name: selected_api_project
