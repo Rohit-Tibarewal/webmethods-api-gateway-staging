@@ -38,7 +38,7 @@ stages:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
             steps:
-            - template: /pipelines/checkout-multi-steps.yml
+            - template: /pipelines/step-templates/checkout-multi-steps.yml
               parameters:
                 apgwassets_repo_alias: "APIGWASSETS_REPO" 
             - download: none
