@@ -1,11 +1,14 @@
+parameters:
+- name: apgwassets_repo_alias
+- name: api_project
 steps:
   - checkout: self
     submodules: "true"
     persistCredentials: "true"
     clean: "true"
     fetchDepth: 0
-  - checkout: APIGWASSETS_REPO
+  - checkout: ${{parameters.apgwassets_repo_alias}}
     submodules: "true"
     persistCredentials: "true"
     clean: "true"
-    path: APIGWASSETS_REPO
+    path: ${{parameters.apgwassets_repo_alias}}
