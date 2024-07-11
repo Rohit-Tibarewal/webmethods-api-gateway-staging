@@ -1,0 +1,21 @@
+parameters:
+- name: repoPath
+- name: repo_branchname
+resources:
+  repositories:
+  - repository: APIGWASSETS_REPO
+    type: github
+    endpoint: APIGW_AssetsRepo_Github
+    name: $(repoPath)
+    ref: refs/heads/$(repo_branchname)
+steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+    clean: "true"
+    fetchDepth: 0
+  - checkout: APIGWASSETS_REPO
+    submodules: "true"
+    persistCredentials: "true"
+    clean: "true"
+    path: APIGWASSETS_REPO
