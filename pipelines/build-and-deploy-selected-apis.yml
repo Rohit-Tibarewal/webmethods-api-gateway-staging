@@ -1,5 +1,17 @@
 trigger: none
 
+variables:
+- name: repoPath
+  value: $(apigwassets_org)/$(apigwassets_reponame)
+
+resources:
+  repositories:
+  - repository: APIGWASSETS_REPO
+    type: github
+    endpoint: APIGW_AssetsRepo_Github
+    name: $(repoPath)
+    ref: refs/heads/$(apigwassets_repo_branchname)
+    
 parameters:
 - name: selected_api_project
   displayName: Deploy which API project(s)?
