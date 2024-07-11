@@ -8,14 +8,3 @@ resources:
     endpoint: APIGW_AssetsRepo_Github
     name: ${{parameters.agwassets_repo_path}}
     ref: refs/heads/${{parameters.agwassets_repo_branchname}}
-steps:
-  - checkout: self
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-    fetchDepth: 0
-  - checkout: APIGWASSETS_REPO
-    submodules: "true"
-    persistCredentials: "true"
-    clean: "true"
-    path: APIGWASSETS_REPO
