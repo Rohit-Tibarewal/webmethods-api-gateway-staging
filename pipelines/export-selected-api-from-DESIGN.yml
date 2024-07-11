@@ -3,7 +3,8 @@ trigger: none
 variables:
 - name: repoPath
   value: $(apigwassets_org)/$(apigwassets_reponame)
-  apigwassets_repo_alias: 'APIGWASSETS_REPO'
+- name: apigwassets_repo_alias
+  value: 'APIGWASSETS_REPO'
     
 resources:
   repositories:
