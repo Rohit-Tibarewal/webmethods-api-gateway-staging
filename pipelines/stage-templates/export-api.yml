@@ -15,6 +15,10 @@ parameters:
   type: string
 - name: deployment_sets
   type: object
+- name: agwassets_repo_path
+  type: string
+- name: agwassets_repo_branchname
+  type: string
 
 - name: selected_api_project
   type: string
@@ -38,16 +42,10 @@ stages:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
             steps:
-            - checkout: self
-              submodules: "true"
-              persistCredentials: "true"
-              clean: "true"
-              fetchDepth: 0
-            - checkout: APIGWASSETS_REPO
-              submodules: "true"
-              persistCredentials: "true"
-              clean: "true"
-              path: APIGWASSETS_REPO
+            - template: /pipelines/checkout-multi-template.yml
+              parameters:
+                agwassets_repo_path: ${{parameters.agwassets_repo_path}} 
+                agwassets_repo_branchname: ${{parameters.agwassets_repo_branchname}} 
             - download: none
             - bash: |
                 ls -lrt $(Agent.BuildDirectory)
