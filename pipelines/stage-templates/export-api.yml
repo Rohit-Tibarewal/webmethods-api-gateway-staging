@@ -50,9 +50,9 @@ stages:
               path: APIGWASSETS_REPO
             - download: none
             - bash: |
-                echo "name = $[ resources.repositories.APIGWASSETS_REPO.name ]"
-                echo "ref = $[ resources.repositories.APIGWASSETS_REPO.ref ]"
-                echo "url = $[ resources.repositories.APIGWASSETS_REPO.url ]"
+                echo "name = ${resources.repositories.APIGWASSETS_REPO.name}"
+                echo "ref = ${resources.repositories.APIGWASSETS_REPO.ref}"
+                echo "url = ${resources.repositories.APIGWASSETS_REPO.url}"
                 ls -lrt $(Agent.BuildDirectory)
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
