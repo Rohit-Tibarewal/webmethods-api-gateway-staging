@@ -38,11 +38,11 @@ stages:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
             steps:
-             variables:
-              APIGWASSETS_REPOref: $[ resources.repositories.APIGWASSETS_REPO.ref ]
-              APIGWASSETS_REPOname: $[ resources.repositories.APIGWASSETS_REPO.name ]
-              APIGWASSETS_REPOtype: $[ resources.repositories.APIGWASSETS_REPO.type ]
-              APIGWASSETS_REPOurl: $[ resources.repositories.APIGWASSETS_REPO.url ]
+              variables:
+                APIGWASSETS_REPOref: $[ resources.repositories.APIGWASSETS_REPO.ref ]
+                APIGWASSETS_REPOname: $[ resources.repositories.APIGWASSETS_REPO.name ]
+                APIGWASSETS_REPOtype: $[ resources.repositories.APIGWASSETS_REPO.type ]
+                APIGWASSETS_REPOurl: $[ resources.repositories.APIGWASSETS_REPO.url ]
             - checkout: self
               submodules: "true"
               persistCredentials: "true"
