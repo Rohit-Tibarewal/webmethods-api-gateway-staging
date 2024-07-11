@@ -42,10 +42,9 @@ stages:
         runOnce:    #rolling, canary are the other strategies that are supported
           deploy:
             steps:
-            - template: /pipelines/checkout-multi-template.yml
+            - template: /pipelines/checkout-multi-steps.yml
               parameters:
-                agwassets_repo_path: ${{parameters.agwassets_repo_path}} 
-                agwassets_repo_branchname: ${{parameters.agwassets_repo_branchname}} 
+                apgwassets_repo_alias: "APIGWASSETS_REPO" 
             - download: none
             - bash: |
                 ls -lrt $(Agent.BuildDirectory)
