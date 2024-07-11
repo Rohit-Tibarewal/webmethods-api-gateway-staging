@@ -1,0 +1,11 @@
+steps:
+  - checkout: self
+    submodules: "true"
+    persistCredentials: "true"
+    clean: "true"
+    fetchDepth: 0
+  - checkout: APIGWASSETS_REPO
+    submodules: "true"
+    persistCredentials: "true"
+    clean: "true"
+    path: APIGWASSETS_REPO
