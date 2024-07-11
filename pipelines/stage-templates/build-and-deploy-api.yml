@@ -54,6 +54,11 @@ stages:
                         submodules: "true"
                         persistCredentials: "true"
                         fetchDepth: 0
+                      - checkout: APIGWASSETS_REPO
+                        submodules: "true"
+                        persistCredentials: "true"
+                        clean: "true"
+                        path: APIGWASSETS_REPO                   
                       - template: /pipelines/step-templates/retrieve-build.yml
                         parameters:
                           target_stage_name: ${{deployment_target}}
