@@ -1,6 +1,6 @@
 parameters:
 - name: apgwassets_repo_alias
-- name: api_project
+
 steps:
   - checkout: self
     submodules: "true"
