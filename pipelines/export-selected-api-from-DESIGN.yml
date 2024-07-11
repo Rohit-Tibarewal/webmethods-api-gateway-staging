@@ -4,14 +4,6 @@ variables:
 - name: repoPath
   value: $(apigwassets_org)/$(apigwassets_reponame)
 
-resources:
-  repositories:
-  - repository: APIGWASSETS_REPO
-    type: github
-    endpoint: APIGW_AssetsRepo_Github
-    name: $(repoPath)
-    ref: refs/heads/$(apigwassets_repo_branchname)
-
 parameters:
 - name: selected_api_project
   displayName: Export which API project?
@@ -52,4 +44,6 @@ stages:
     parameters:
       commit_message: ${{parameters.commit_message}}
       selected_api_project: ${{parameters.selected_api_project}}
+      agwassets_repo_path: $(repoPath)
+      agwassets_repo_branchname: $(apigwassets_repo_branchname)      
     selected_environment_set: ${{parameters.selected_environment_set}}
