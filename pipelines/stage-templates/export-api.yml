@@ -15,10 +15,6 @@ parameters:
   type: string
 - name: deployment_sets
   type: object
-- name: agwassets_repo_path
-  type: string
-- name: agwassets_repo_branchname
-  type: string
 
 - name: selected_api_project
   type: string
@@ -47,6 +43,10 @@ stages:
                 apgwassets_repo_alias: "APIGWASSETS_REPO" 
             - download: none
             - bash: |
+                echo repo ref is $[ resources.repositories['APIGWASSETS_REPO'].ref ]
+                echo repo name is $[ resources.repositories['APIGWASSETS_REPO'].name ]
+                echo repo id is $[ resources.repositories['APIGWASSETS_REPO'].id ]
+                echo repo url is $[ resources.repositories['APIGWASSETS_REPO'].url ]
                 ls -lrt $(Agent.BuildDirectory)
                 ls -lrt $(Agent.BuildDirectory)/s
                 ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/apis
