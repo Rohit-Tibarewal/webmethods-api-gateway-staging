@@ -45,6 +45,15 @@ parameters:
 name: "$(Date:yyyyMMdd).$(Rev:r)-${{parameters.selected_api_project}}"
 
 stages:
+- stage: Print Repo details
+  jobs: 
+  - job: print
+    steps:
+    - bash: |
+        echo repo ref is $[ resources.repositories['APIGWASSETS_REPO'].ref ]
+        echo repo name is $[ resources.repositories['APIGWASSETS_REPO'].name ]
+        echo repo id is $[ resources.repositories['APIGWASSETS_REPO'].id ]
+        echo repo url is $[ resources.repositories['APIGWASSETS_REPO'].url ]
 - template: /pipelines/stage-templates/inject-parameters-for-${{parameters.selected_environment_set}}.yml
   parameters:
     template: /pipelines/stage-templates/export-api.yml
