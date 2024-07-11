@@ -8,7 +8,7 @@ variables:
     
 resources:
   repositories:
-  - repository: $(apigwassets_repo_alias)
+  - repository: APIGWASSETS_REPO
     type: github
     endpoint: APIGW_AssetsRepo_Github
     name: $(repoPath)
