@@ -153,7 +153,7 @@ steps:
 - bash: |
    curl $(build_environment_insecure_flag) \
           -d @"$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/export_payload.json" \
-          --output $(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
+          --output $(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
