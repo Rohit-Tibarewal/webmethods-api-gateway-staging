@@ -13,35 +13,35 @@ steps:
 - task: qetza.replacetokens.replacetokens-task.replacetokens@5
   displayName: 'Replace tokens with variable values in assets'
   inputs:
-    targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets/**/*'
+    targetFiles: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/assets/**/*'
     actionOnMissing: fail
   condition: ${{parameters.replace_condition}}
 
 - task: qetza.replacetokens.replacetokens-task.replacetokens@5
   displayName: 'Replace tokens with variable values in local aliases.json'
   inputs:
-    targetFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json'
+    targetFiles: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/aliases.json'
     actionOnMissing: fail
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
-- bash: cat $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json || echo File not found
+- bash: cat $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/aliases.json || echo File not found
   displayName: Log local aliases.json after value substitution
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
 - task: qetza.replacetokens.replacetokens-task.replacetokens@5
   displayName: 'Replace tokens with variable values in global aliases.json'
   inputs:
-    targetFiles: '$(System.DefaultWorkingDirectory)/apis/aliases.json'
+    targetFiles: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/aliases.json'
     actionOnMissing: fail
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
-- bash: cat $(System.DefaultWorkingDirectory)/apis/aliases.json || echo File not found
+- bash: cat $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/aliases.json || echo File not found
   displayName: Log global aliases.json after value substitution
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/assets'
+    rootFolderOrFile: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/assets'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip'
@@ -62,7 +62,7 @@ steps:
    echo "##vso[task.setvariable variable=build_environment_port]`jq -r '.values[] | select(.key == "port") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
    echo "##vso[task.setvariable variable=build_environment_insecure_flag]`jq -r '.values[] | select(.key == "insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
    echo "##vso[task.setvariable variable=build_environment_api_insecure_flag]`jq -r '.values[] | select(.key == "api_insecure_flag") | .value' environments/${{parameters.environment_set}}/${{parameters.build_environment_file}}`"
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Read and parse API Gateway ${{parameters.build_environment_name}} configuration, extract protocol, ip, hostname, port and insecure_flag'
 
 - bash: |
@@ -71,13 +71,13 @@ steps:
     --env-var preparer_password='$(preparer_password)' \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_insecure_flag)
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Delete all APIs, applications, strategies, scopes and aliases on API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_ip)
 
 - bash: |
-    echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/scopes.json`"
+    echo "##vso[task.setvariable variable=scopes]`jq -c '.' $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/scopes.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of scopes to be imported'
 
@@ -91,14 +91,14 @@ steps:
     --env-var file_Loc=$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_insecure_flag)
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Import the deployable to API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_ip)
 
 - bash: |
     echo "Newman Postman Testing placeholder..."
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Run tests on API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_ip)
@@ -106,7 +106,7 @@ steps:
 
 # - task: PublishBuildArtifacts@1
 #   inputs:
-#     pathToPublish: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
+#     pathToPublish: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml'
 #     artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
 #   condition: ${{parameters.test_condition}}
 
@@ -118,12 +118,12 @@ steps:
 #     fileType: json
 
 - bash: |
-    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_stage_name}}"}]' $(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/aliases.json`"
+    echo "##vso[task.setvariable variable=aliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_stage_name}}"}]' $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of project-specific aliases to be updated'
 
 - bash: |
-    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_stage_name}}"}]' $(System.DefaultWorkingDirectory)/apis/aliases.json`"
+    echo "##vso[task.setvariable variable=globalAliases]`jq -c '[.[] | {id: .id, content: ."${{parameters.target_stage_name}}"}]' $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/aliases.json`"
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Prepare list of global aliases to be updated'
 
@@ -144,7 +144,7 @@ steps:
     --env-var globalAliases='$(globalAliases)' \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_insecure_flag)
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Validate and prepare assets for ${{parameters.target_stage_name}}: Validate policy actions, application names and API groupings, update aliases, delete all unwanted applications, unsuspend all remaining applications, add build details as tags to APIs'
   env:
     no_proxy: $(build_environment_ip)
@@ -157,7 +157,7 @@ steps:
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
           $(build_environment_protocol)://$(build_environment_hostname):$(build_environment_port)/rest/apigateway/archive
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Export the deployable from API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_hostname)
@@ -171,7 +171,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit' 
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/apis/${{parameters.api_project}}/junitReport.xml'
+    testResultsFiles: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml'
     testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_stage_name}}'
     publishRunAttachments: false
   condition: ${{parameters.test_condition}}
