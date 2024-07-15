@@ -3,7 +3,7 @@ parameters:
 - name: api_project
 
 steps:
-- publish: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip"
+- publish: "$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip"
   artifact: ${{parameters.target_stage_name}}_${{parameters.api_project}}_build_result
   displayName: Build Upload
 
