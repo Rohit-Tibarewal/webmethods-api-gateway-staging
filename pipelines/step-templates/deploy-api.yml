@@ -31,7 +31,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
+    --env-var file_Loc=$(Agent.BuildDirectory)/APIGWASSETS_REPO/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
     -e environments/${{parameters.environment_set}}/${{parameters.target_environment_file}} \
     $(target_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
