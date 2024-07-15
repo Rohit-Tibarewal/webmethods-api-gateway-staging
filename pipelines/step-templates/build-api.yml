@@ -88,7 +88,7 @@ steps:
     --env-var initializer_user='$(initializer_user)' \
     --env-var initializer_password='$(initializer_password)' \
     --env-var scopes='$(scopes)' \
-    --env-var file_Loc=$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip \
+    --env-var file_Loc=$(System.DefaultWorkingDirectory)/$(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_import.zip \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
@@ -152,7 +152,7 @@ steps:
 
 - bash: |
    curl $(build_environment_insecure_flag) \
-          -d @"apis/${{parameters.api_project}}/export_payload.json" \
+          -d @"$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/export_payload.json" \
           --output $(Build.BuildId)_${{parameters.target_stage_name}}_${{parameters.api_project}}_export.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
