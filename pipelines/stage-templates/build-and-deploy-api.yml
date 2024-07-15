@@ -50,15 +50,9 @@ stages:
                   runOnce:    #rolling, canary are the other strategies that are supported
                     deploy:
                       steps:
-                      - checkout: self
-                        submodules: "true"
-                        persistCredentials: "true"
-                        fetchDepth: 0
-                      - checkout: APIGWASSETS_REPO
-                        submodules: "true"
-                        persistCredentials: "true"
-                        clean: "true"
-                        path: APIGWASSETS_REPO                   
+                      - template: /pipelines/step-templates/checkout-multi-steps.yml
+                        parameters:
+                          apgwassets_repo_alias: "APIGWASSETS_REPO"                 
                       - template: /pipelines/step-templates/retrieve-build.yml
                         parameters:
                           target_stage_name: ${{deployment_target}}
