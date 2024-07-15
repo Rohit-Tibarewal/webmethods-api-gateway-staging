@@ -27,10 +27,9 @@ jobs:
     runOnce:    #rolling, canary are the other strategies that are supported
       deploy:
         steps:
-        - checkout: self
-          submodules: "true"
-          persistCredentials: "true"
-          fetchDepth: 0
+        - template: /pipelines/step-templates/checkout-multi-steps.yml
+          parameters:
+            apgwassets_repo_alias: "APIGWASSETS_REPO" 
         - download: none
         - template: /pipelines/step-templates/build-api.yml
           parameters:
