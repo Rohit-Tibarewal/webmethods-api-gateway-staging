@@ -35,10 +35,9 @@ stages:
           runOnce:    #rolling, canary are the other strategies that are supported
             deploy:
               steps:
-              - checkout: self
-                submodules: "true"
-                persistCredentials: "true"
-                fetchDepth: 0
+              - template: /pipelines/step-templates/checkout-multi-steps.yml
+                parameters:
+                  apgwassets_repo_alias: "APIGWASSETS_REPO" 
               - download: none
               # - bash: "Debug: $[dependencies.Check_environment_file_for_${{environment.name}}.outputs['Check_environment_file.environment_file_exists']]"
               - template: /pipelines/step-templates/configure-api-gateway.yml
