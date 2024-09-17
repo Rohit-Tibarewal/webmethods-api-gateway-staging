@@ -9,6 +9,18 @@ trigger: none
 #     source: 'Helm Deploy API Gateways' # The name of the pipeline referenced by this pipeline resource.
 #     trigger: true
 
+variables:
+- name: repoPath
+  value: $(apigwassets_org)/$(apigwassets_reponame)
+
+resources:
+  repositories:
+  - repository: APIGWASSETS_REPO
+    type: github
+    endpoint: APIGW_AssetsRepo_Github
+    name: $(repoPath)
+    ref: refs/heads/$(apigwassets_repo_branchname)
+    
 parameters:
 - name: selected_environment_set
   displayName: Configure API Gateway(s) in which environment set?
