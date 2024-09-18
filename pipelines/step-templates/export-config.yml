@@ -14,9 +14,17 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract ip, hostname, port and insecure_flag'
 
-- bash: |
+   - bash: |
+   ls -lrt $(System.DefaultWorkingDirectory)
+   ls -lrt $(Agent.BuildDirectory)
+   ls -lrt $(Agent.BuildDirectory)/s
+   ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/configuration
+   ls -lrt $(Agent.BuildDirectory)/s/webmethods-api-gateway-staging/configuration/${{parameters.environment_name}}
+   ls -lrt $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/configuration
+   ls -lrt $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/configuration/${{parameters.environment_name}}
+   cat $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/configuration/${{parameters.environment_name}}/export_payload.json
    curl -v $(environment_insecure_flag) \
-          -d @"configuration/${{parameters.stage_name}}/export_payload.json" \
+          -d @"$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/configuration/${{parameters.stage_name}}/export_payload.json" \
           --output $(Build.BuildId)_export_from_${{parameters.environment_name}}.zip \
           -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json" \
           --user '$(exporter_user)':'$(exporter_password)' \
@@ -35,7 +43,7 @@ steps:
 - task: ExtractFiles@1
   inputs:
     archiveFilePatterns: '$(System.DefaultWorkingDirectory)/$(Build.BuildId)_export_from_${{parameters.environment_name}}.zip'
-    destinationFolder: '$(System.DefaultWorkingDirectory)/configuration/${{parameters.stage_name}}/assets'
+    destinationFolder: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/configuration/${{parameters.stage_name}}/assets'
     cleanDestinationFolder: true
     overwriteExistingFiles: false
     #pathToSevenZipTool: 
