@@ -14,7 +14,7 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Read and parse API Gateway ${{parameters.environment_name}} configuration, extract ip, hostname, port and insecure_flag'
 
-   - bash: |
+- bash: |
    ls -lrt $(System.DefaultWorkingDirectory)
    ls -lrt $(Agent.BuildDirectory)
    ls -lrt $(Agent.BuildDirectory)/s
