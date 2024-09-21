@@ -32,7 +32,8 @@ parameters:
   - countries
   - inventory
   - inventory_direct
-  - inventory_direct_int    
+  - inventory_direct_int  
+  - SwaggerPetstore
 - name: selected_environment_set
   displayName: Export API(s) from DESIGN API Gateway in which environment set?
   default: webm_io
