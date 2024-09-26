@@ -24,6 +24,13 @@ steps:
     actionOnMissing: fail
   condition: and(succeeded(), ${{parameters.replace_condition}})
 
+- task: replacetokens@6
+  inputs:
+    root: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}'
+    sources: '**/*.json'
+    missingVarAction: 'keep'
+  displayName: 'Replace tokens in API Test Collection'
+      
 - bash: cat $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/aliases.json || echo File not found
   displayName: Log local aliases.json after value substitution
   condition: and(succeeded(), ${{parameters.replace_condition}})
@@ -97,21 +104,21 @@ steps:
     no_proxy: $(build_environment_ip)
 
 - bash: |
-    echo "Newman Postman Testing placeholder..."
-    newman run assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml \
+    echo "Newman Postman Testing begins..."
+    newman run $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml \
     -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
     $(build_environment_api_insecure_flag)
-  workingDirectory: '$(Agent.BuildDirectory)/APIGWASSETS_REPO'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Run tests on API Gateway ${{parameters.build_environment_name}}'
   env:
     no_proxy: $(build_environment_ip)
   condition: and(succeeded(), ${{parameters.test_condition}})
 
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     pathToPublish: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml'
-#     artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
-#   condition: ${{parameters.test_condition}}
+ - task: PublishBuildArtifacts@1
+   inputs:
+     pathToPublish: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml'
+     artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
+   condition: ${{parameters.test_condition}}
 
 # - task: FileTransform@1
 #   displayName: 'Replace alias values using pipeline variables'
