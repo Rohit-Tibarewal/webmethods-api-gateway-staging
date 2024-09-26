@@ -44,7 +44,7 @@ steps:
     missingVarAction: 'keep'
   displayName: 'Replace tokens in API Test Collection'
 
-- bash: cat $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/API_Test.json || echo File not found
+- bash: cat $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/taurus.yaml || echo File not found
   displayName: Log API_Test.json after token replacement
   condition: and(succeeded(), ${{parameters.replace_condition}})
   
