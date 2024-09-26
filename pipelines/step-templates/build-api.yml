@@ -27,7 +27,9 @@ steps:
 - task: replacetokens@6
   inputs:
     root: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}'
-    sources: '**/*.json'
+    sources: |
+      **/*.json
+      **/*.yaml
     missingVarAction: 'keep'
   displayName: 'Replace tokens in API Test Collection'
 
@@ -107,6 +109,17 @@ steps:
   env:
     no_proxy: $(build_environment_ip)
 
+- task: TaurusRunner@0
+  inputs:
+    taurusConfig: 
+    taurusArguments: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/taurus.yaml'
+    jmeterHome: '$(JMeterInstaller.JMeterHome)'
+    jmeterPath: '$(JMeterInstaller.JMeterPath)'
+    jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
+    outputDir: 'taurus-output'
+    reportName: 'TaurusTestReport'
+  displayName: 'Taurus Runner for API Tests'
+  
 - bash: |
     echo "Newman Postman Testing begins..."
     newman run $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml \
@@ -123,6 +136,7 @@ steps:
     pathToPublish: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml'
     artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
   condition: ${{parameters.test_condition}}
+
 
 # - task: FileTransform@1
 #   displayName: 'Replace alias values using pipeline variables'
