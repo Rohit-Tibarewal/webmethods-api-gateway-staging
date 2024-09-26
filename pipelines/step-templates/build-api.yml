@@ -10,6 +10,17 @@ parameters:
 - name: environment_set
 
 steps:
+- task: JMeterInstaller@0
+  displayName: 'Install Jmeter on agent'
+  inputs:
+    jmeterVersion: '5.6.3'
+
+- task: TaurusInstaller@0
+  displayName: 'Install Taurus and Python on agent'
+  inputs:
+    taurusVersion: '1.16.32'
+    pythonCommand: 'python3'
+    
 - task: qetza.replacetokens.replacetokens-task.replacetokens@5
   displayName: 'Replace tokens with variable values in assets'
   inputs:
