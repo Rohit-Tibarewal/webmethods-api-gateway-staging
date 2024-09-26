@@ -127,15 +127,15 @@ steps:
     jmeterHome: '$(JMeterInstaller.JMeterHome)'
     jmeterPath: '$(JMeterInstaller.JMeterPath)'
     jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
-    outputDir: 'taurus-output'
+    outputDir: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/taurus-output'
     reportName: 'TaurusTestReport'
   displayName: 'Taurus Runner for API Tests'
   
 - bash: |
     echo "Newman Postman Testing begins..."
-    newman run $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml \
-    -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
-    $(build_environment_api_insecure_flag)
+#    newman run $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/resources/postman/collections/api_tests/${{parameters.api_project}}/API_Test.json --reporters cli,junit --reporter-junit-export $(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml \
+#    -e environments/${{parameters.environment_set}}/${{parameters.build_environment_file}} \
+#    $(build_environment_api_insecure_flag)
   workingDirectory: '$(System.DefaultWorkingDirectory)/webmethods-api-gateway-staging'
   displayName: 'Run tests on API Gateway ${{parameters.build_environment_name}}'
   env:
@@ -144,8 +144,8 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml'
-    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_test_results'
+    pathToPublish: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/taurus-output'
+    artifactName: '${{parameters.target_stage_name}}_${{parameters.api_project}}_taurus_test_results'
   condition: ${{parameters.test_condition}}
 
 
@@ -210,7 +210,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit' 
-    testResultsFiles: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/junitReport.xml'
+    testResultsFiles: '$(Agent.BuildDirectory)/APIGWASSETS_REPO/assets/apigateway/apiprojects/${{parameters.api_project}}/taurus-output/report/TEST-Taurus.xml'
     testRunTitle: 'QA environment test results for ${{parameters.api_project}}_${{parameters.target_stage_name}}'
     publishRunAttachments: false
   condition: ${{parameters.test_condition}}
